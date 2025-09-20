@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Victor Dada - Biography</title>
-<link rel="stylesheet" href="work.css">
+<link rel="stylesheet" href="../work.css">
 </head>
 <body>
 <header>
@@ -13,31 +13,30 @@
 <!-- Navbar -->
 <nav class="navbar" id="navbar">
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  
-  <a href="/my-website/" class="nav-link">Home</a>
-  <a href="/my-website/biography" class="nav-link">Biography</a>
+
+  <a href="../" class="nav-link">Home</a>
+  <a href="./" class="nav-link">Biography</a>
 
   <div class="dropdown">
     <button class="dropbtn" onclick="toggleDropdown(this)">Media</button>
     <div class="dropdown-content">
-      <a href="/my-website/media#media-2023">2023</a>
-      <a href="/my-website/media#media-2024">2024</a>
-      <a href="/my-website/media#media-2025">2025</a>
+      <a href="../media#media-2023">2023</a>
+      <a href="../media#media-2024">2024</a>
+      <a href="../media#media-2025">2025</a>
     </div>
   </div>
 
   <div class="dropdown">
     <button class="dropbtn" onclick="toggleDropdown(this)">Pictures</button>
     <div class="dropdown-content">
-      <a href="/my-website/pictures#pictures-2023">2023</a>
-      <a href="/my-website/pictures#pictures-2024">2024</a>
-      <a href="/my-website/pictures#pictures-2025">2025</a>
+      <a href="../pictures#pictures-2023">2023</a>
+      <a href="../pictures#pictures-2024">2024</a>
+      <a href="../pictures#pictures-2025">2025</a>
     </div>
   </div>
 
-  <a href="/my-website/contact" class="nav-link">Contact</a>
+  <a href="../contact" class="nav-link">Contact</a>
 </nav>
-
 </header>
 
 <div id="mode" style="text-align:right;">DARK MODE</div>
@@ -54,7 +53,7 @@
 <div class="text-content">
 <p><strong>Victor</strong> is a Nigeria-born student currently living in the United Kingdom, whose journey has been defined by creativity, determination, and a commitment to both personal and professional growth...</p>
 
-<p>Victor’s story began in Nigeria, where he attended <strong>Calvary International School</strong> Ondo State for primary education before Preston International School for secondary education. Alongside academics, Victor nurtured his passion for music, playing piano and trumpet, earning a Muson Preliminary Grade in Piano in 2020, and performing in school choir and brass band...</p>
+<p>Victor’s story began in Nigeria, where he attended <strong>Calvary International School</strong> for primary education and <strong>Preston International School</strong> for secondary education. Alongside academics, Victor nurtured his passion for music, playing piano and trumpet, earning a Muson Preliminary Grade in Piano in 2020, and performing in school choir and brass band...</p>
 
 <p>He explored graphic design with Photoshop, Illustrator, CorelDRAW, and developed an interest in computing. In the UK, he completed BTEC Extended Certificate in Computing (2023), National Diploma in Computing (2024–2025), and participated in school NHS collaboration projects, earning a Certificate of Achievement...</p>
 
@@ -69,7 +68,7 @@
 <p>&copy; <span id="copyright-year"></span> Victor Dada</p>
 </footer>
 
-<script src="/my-website/assets/theme.js"></script>
+
 <script>
 // Set copyright year
 document.getElementById('copyright-year').innerText = new Date().getFullYear();
@@ -90,18 +89,20 @@ function toggleMenu() {
 function toggleDropdown(button) {
   const dropdown = button.parentElement;
   document.querySelectorAll('.dropdown').forEach(d => {
-    if (d !== dropdown) { d.classList.remove('active'); }
+    if (d !== dropdown) d.classList.remove('active');
   });
   dropdown.classList.toggle('active');
 }
 
-// Highlight active link
-const path = location.pathname.split("/").slice(-2, -1)[0]; // folder name
-document.querySelectorAll(".nav-link").forEach(link => {
-  if (link.getAttribute("href").includes(path)) {
-    link.classList.add("active");
-  }
-});
+// Highlight current page link
+(function highlightNav() {
+  const pathParts = location.pathname.split("/").filter(Boolean);
+  const currentFolder = pathParts[pathParts.length - 1] || "";
+  document.querySelectorAll(".nav-link").forEach(link => {
+    const href = link.getAttribute("href").replace(/\/$/, "");
+    if (href.endsWith(currentFolder)) link.classList.add("active");
+  });
+})();
 </script>
 </body>
 </html>
