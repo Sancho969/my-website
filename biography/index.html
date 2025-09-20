@@ -9,6 +9,8 @@
 <body>
 <header>
 <h1>VICTOR DADA</h1>
+
+<!-- Navbar -->
 <nav class="navbar" id="navbar">
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
   
@@ -36,15 +38,13 @@
   <a href="/my-website/contact" class="nav-link">Contact</a>
 </nav>
 
-
-
 </header>
 
 <div id="mode" style="text-align:right;">DARK MODE</div>
 <div class="button">
   <label class="switch">
       <input type="checkbox" onchange="toggleTheme()">
-    <span class="slider round"></span>
+      <span class="slider round"></span>
   </label>
 </div>
 
@@ -52,21 +52,16 @@
 <h2>Biography</h2>
 <div class="bio-content">
 <div class="text-content">
-<p><strong>Victor</strong> is a Nigeria-born student currently living in the United Kingdom, whose journey has been defined by creativity, determination, and a commitment to both personal and professional growth. Known for his ability to support others through training, mentoring, and teamwork, he is proactive, hands-on, and dedicated to achieving goals through careful planning and prioritisation. His strengths lie in problem-solving, communication, and collaboration, which enable him to contribute meaningfully in academic, creative, and professional environments. Victor combines resourcefulness with creativity and a can-do attitude, consistently producing high-quality results and seeking out opportunities to improve himself and the teams he works with.</p>
+<p><strong>Victor</strong> is a Nigeria-born student currently living in the United Kingdom, whose journey has been defined by creativity, determination, and a commitment to both personal and professional growth...</p>
 
-<p>Victor’s story began in Nigeria, where he attended <strong>Calvary International School</strong> Ondo State for his primary education before continuing at <strong>Preston International School</strong> Ondo State for his secondary education. During his years at Preston, he studied for the West African Senior School Certificate Examination (WASSCE), which he completed and came out with flying colours in 2021. Alongside his academic work, Victor nurtured his passion for music. He began playing the piano at the age of seven and later expanded his musical talents by learning the trumpet. His dedication led him to earn a Muson Preliminary Grade in Piano Playing in 2020, a milestone achievement that showcased his discipline and talent. He was also an active member of both the school choir and the brass band, performing regularly and developing a deep appreciation for music as both a personal passion and a collaborative art form.<br> Among his memorable performances were pieces such as <strong>“O Thou That Tellest” where he played as an accompanist,"Timmy Turner (Fairy odd parents)"", “America Patrol and so on”</strong> which highlighted his instrumental skills. Between 2019 and 2021, Victor’s strong character and positive influence among his peers were recognised with Behavioural Awards, reflecting his reliability, good conduct, and leadership qualities during his school years.</p>
+<p>Victor’s story began in Nigeria, where he attended <strong>Calvary International School</strong> Ondo State for primary education before Preston International School for secondary education. Alongside academics, Victor nurtured his passion for music, playing piano and trumpet, earning a Muson Preliminary Grade in Piano in 2020, and performing in school choir and brass band...</p>
 
-<p>In addition to his musical talents, Victor developed a keen interest in creativity and technology from a young age. He explored graphic design, gaining practical experience with tools such as Photoshop, Illustrator, and CorelDRAW. This early exposure to digital creativity sparked a curiosity about computing, programming, and the role of technology in solving problems. Eager to expand his knowledge, Victor moved to the United Kingdom, where he continued his educational journey at Leicester College. In 2023, he completed the BTEC Extended Certificate in Computing, building a strong foundation in areas such as software, hardware, and IT systems.<br>Following this, he enrolled in the National Diploma in Computing at Leicester College (2024–2025), deepening his technical skills and preparing himself for higher-level studies. His dedication and performance earned him opportunities to participate in projects, including a school NHS collaboration with Leicestershire Health Informatics Services, where he was awarded a Certificate of Achievement in 2024. This project experience strengthened his understanding of how computing can make a real-world impact, particularly in fields that directly benefit communities.</p>
+<p>He explored graphic design with Photoshop, Illustrator, CorelDRAW, and developed an interest in computing. In the UK, he completed BTEC Extended Certificate in Computing (2023), National Diploma in Computing (2024–2025), and participated in school NHS collaboration projects, earning a Certificate of Achievement...</p>
 
-<p>Victor has gained admission to the University of Derby to study Computer Science where he hopes to continue exploring programming, digital systems, and innovative technologies. His studies align with his long-term goals of combining creativity and technical expertise to produce meaningful, modern solutions. Alongside his academic progress, he has been expanding his skills in animation and motion graphics, adding a creative layer to his already solid computing knowledge. His growing interest in digital media and design complements his technical skills, giving him a unique edge in blending creativity with problem-solving. This is why he is decided to take a gap year to further deepen his skills in animation and motion graphics before starting university. </p>
+<p>Victor gained admission to the University of Derby for Computer Science. He also studies animation and motion graphics, combining creativity and technical expertise. His skills include problem-solving, communication, teamwork, public relations, marketing, and digital creativity...</p>
 
-<p>Victor’s skills reflect his versatility and adaptability. He is an effective problem-solver with strong communication abilities, able to work collaboratively in teams while also thriving independently. His resourcefulness allows him to handle challenges with resilience, while his fast learning enables him to quickly adapt to new technologies and environments. He also has a foundation in public relations and marketing, which further supports his ability to collaborate and present ideas effectively. His creativity, whether expressed through music, digital design, or animation, remains one of his defining traits and continues to influence every aspect of his personal and professional journey.</p>
-
-<p>Outside of academics and career ambitions, Victor has a wide range of hobbies and interests that reflect his well-rounded personality. He is passionate about sports, regularly playing football and volleyball, and proudly represents Leicester College as a basketball player. These activities not only keep him active but also reinforce his teamwork, discipline, and competitive spirit. He enjoys playing video games as both a form of entertainment and a way of engaging with technology creatively. Music remains a core part of his life, and he continues to play the piano and trumpet, keeping alive the passion that began in childhood. Additionally, he enjoys writing and learning programing languages and experimenting with creative projects such as digital animations and motion graphics, where he is constantly exploring new ideas and techniques to expand his skills.</p>
-
-<p>Victor’s journey reflects a balance between creativity, technology, and personal growth. From his early years of playing the piano and excelling in school, to his achievements in computing and ongoing studies at the University of Derby, he has consistently shown a dedication to learning, teamwork, and innovation. His blend of technical expertise, musical talent, and creative vision makes him a versatile and adaptable individual, prepared to contribute effectively to both academic and professional environments. Looking to the future, Victor hopes to build a career as a Software and Network Architect, where he can combine his problem-solving abilities, technical expertise, and creativity to design solutions that shape and improve the way people interact with technology. </p>
+<p>Outside academics, Victor enjoys football, volleyball, basketball, video games, music, writing, and creative projects such as digital animations. His journey reflects a balance between creativity, technology, and personal growth, with aspirations to become a Software and Network Architect.</p>
 </div>
-
 </div>
 </section>
 
@@ -74,21 +69,16 @@
 <p>&copy; <span id="copyright-year"></span> Victor Dada</p>
 </footer>
 
-
-<script src="theme.js"></script>
+<script src="/my-website/assets/theme.js"></script>
 <script>
+// Set copyright year
 document.getElementById('copyright-year').innerText = new Date().getFullYear();
+
 // Dark Mode Toggle
-function myFunction() {
-  toggleDarkMode();
-  swapText();
-}
-function toggleDarkMode() {
+function toggleTheme() {
   document.body.classList.toggle("dark-mode");
-}
-function swapText() {
-  var x = document.getElementById("mode");
-  x.innerHTML = (x.innerHTML === "DARK MODE") ? "LIGHT MODE" : "DARK MODE";
+  var mode = document.getElementById("mode");
+  mode.innerHTML = (mode.innerHTML === "DARK MODE") ? "LIGHT MODE" : "DARK MODE";
 }
 
 // Mobile Navbar Toggle
@@ -105,15 +95,13 @@ function toggleDropdown(button) {
   dropdown.classList.toggle('active');
 }
 
-// Highlight active main link based on current page
-const currentPage = location.pathname.split("/").pop();
+// Highlight active link
+const path = location.pathname.split("/").slice(-2, -1)[0]; // folder name
 document.querySelectorAll(".nav-link").forEach(link => {
-  if (link.getAttribute("href") === currentPage) {
+  if (link.getAttribute("href").includes(path)) {
     link.classList.add("active");
   }
 });
-
 </script>
 </body>
 </html>
-
