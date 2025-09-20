@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Victor Dada - Contact</title>
-<link rel="stylesheet" href="work.css">
+<link rel="stylesheet" href="../work.css">
 </head>
 <body>
 <header>
@@ -13,91 +13,70 @@
 <!-- Navbar -->
 <nav class="navbar" id="navbar">
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  
-  <a href="/my-website/" class="nav-link">Home</a>
-  <a href="/my-website/biography" class="nav-link">Biography</a>
+
+  <a href="../" class="nav-link">Home</a>
+  <a href="../biography" class="nav-link">Biography</a>
 
   <div class="dropdown">
     <button class="dropbtn" onclick="toggleDropdown(this)">Media</button>
     <div class="dropdown-content">
-      <a href="/my-website/media#media-2023">2023</a>
-      <a href="/my-website/media#media-2024">2024</a>
-      <a href="/my-website/media#media-2025">2025</a>
+      <a href="../media#media-2023">2023</a>
+      <a href="../media#media-2024">2024</a>
+      <a href="../media#media-2025">2025</a>
     </div>
   </div>
 
   <div class="dropdown">
     <button class="dropbtn" onclick="toggleDropdown(this)">Pictures</button>
     <div class="dropdown-content">
-      <a href="/my-website/pictures#pictures-2023">2023</a>
-      <a href="/my-website/pictures#pictures-2024">2024</a>
-      <a href="/my-website/pictures#pictures-2025">2025</a>
+      <a href="../pictures#pictures-2023">2023</a>
+      <a href="../pictures#pictures-2024">2024</a>
+      <a href="../pictures#pictures-2025">2025</a>
     </div>
   </div>
 
-  <a href="/my-website/contact" class="nav-link">Contact</a>
+  <a href="./" class="nav-link">Contact</a>
 </nav>
-
 </header>
 
 <div id="mode" style="text-align:right;">DARK MODE</div>
 <div class="button">
   <label class="switch">
-     <input type="checkbox" onchange="toggleTheme()">
-     <span class="slider round"></span>
+      <input type="checkbox" onchange="toggleTheme()">
+      <span class="slider round"></span>
   </label>
 </div>
 
-<section id="contact" class="contact-section">
-  <h2>Contact Me</h2>
-  
-  <p><strong>Address:</strong> 196 Tudor Road, Leicester, Leicestershire, United Kingdom</p>
-  <p><strong>Email:</strong> <a href="mailto:oluvictor32@gmail.com">oluvictor32@gmail.com</a></p>
-  <p><strong>Phone:</strong> <a href="tel:+44-07752420569">(+44) 07752420569</a></p>
+<section class="content-section">
+<h2>Contact Me</h2>
+<p><strong>Address:</strong> 196 Tudor Road, Leicester, UK</p>
+<p><strong>Email:</strong> <a href="mailto:oluvictor32@gmail.com">oluvictor32@gmail.com</a></p>
+<p><strong>Phone:</strong> <a href="tel:+447752420569">(+44) 07752420569</a></p>
 
-  <!-- Contact Form -->
-  <form id="contactForm">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <textarea name="message" placeholder="Your Message" required></textarea>
-    <button type="submit">Send Message</button>
-  </form>
+<!-- Contact Form -->
+<form id="contactForm">
+  <input type="text" name="name" placeholder="Your Name" required>
+  <input type="email" name="email" placeholder="Your Email" required>
+  <textarea name="message" placeholder="Your Message" required></textarea>
+  <button type="submit">Send Message</button>
+</form>
 
-  <p id="formMessage" style="color: green; display: none;">
-    Thank you for contacting me! I’ll get back to you soon.
-  </p>
+<p id="formMessage" style="color: green; display: none;">Thank you! I’ll get back to you soon.</p>
 </section>
 
 <footer>
 <p>&copy; <span id="copyright-year"></span> Victor Dada</p>
 </footer>
 
-<script src="/my-website/assets/theme.js"></script>
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
 <script>
-// Set copyright year
+// Set year
 document.getElementById('copyright-year').innerText = new Date().getFullYear();
-
-// Initialize EmailJS
-emailjs.init('PHRzf6HvJtCOh-FvL'); // Replace with your Public Key
-
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  emailjs.sendForm('service_8we21yj', 'template_98d4y8u', this)
-    .then(() => {
-      document.getElementById('formMessage').style.display = 'block';
-      this.reset();
-    }, (err) => {
-      console.error('FAILED...', err);
-      alert("Something went wrong. Please try again.");
-    });
-});
 
 // Dark Mode Toggle
 function toggleTheme() {
   document.body.classList.toggle("dark-mode");
-  const mode = document.getElementById("mode");
-  mode.innerHTML = (mode.innerHTML === "DARK MODE") ? "LIGHT MODE" : "DARK MODE";
+  document.getElementById("mode").innerHTML = (document.getElementById("mode").innerHTML === "DARK MODE") ? "LIGHT MODE" : "DARK MODE";
 }
 
 // Mobile Navbar Toggle
@@ -105,20 +84,35 @@ function toggleMenu() {
   document.getElementById("navbar").classList.toggle("show");
 }
 
-// Mobile Dropdown Accordion
+// Mobile Dropdown
 function toggleDropdown(button) {
   const dropdown = button.parentElement;
-  document.querySelectorAll('.dropdown').forEach(d => {
-    if (d !== dropdown) d.classList.remove('active');
-  });
+  document.querySelectorAll('.dropdown').forEach(d => { if (d !== dropdown) d.classList.remove('active'); });
   dropdown.classList.toggle('active');
 }
 
-// Highlight active main link
-const path = location.pathname.split("/").slice(-2, -1)[0];
-document.querySelectorAll(".nav-link").forEach(link => {
-  if (link.getAttribute("href").includes(path)) link.classList.add("active");
+// Highlight active link
+(function highlightNav() {
+  const pathParts = location.pathname.split("/").filter(Boolean);
+  const currentFolder = pathParts[pathParts.length - 1];
+  document.querySelectorAll(".nav-link").forEach(link => {
+    if (link.getAttribute("href").includes(currentFolder)) link.classList.add("active");
+  });
+})();
+
+// EmailJS
+emailjs.init('YOUR_PUBLIC_KEY'); // replace with your public key
+document.getElementById('contactForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  emailjs.sendForm('service_XXXX','template_XXXX', this)
+    .then(function(){ 
+      document.getElementById('formMessage').style.display='block';
+      document.getElementById('contactForm').reset();
+    }, function(error){ 
+      alert("Error sending message. Try again.");
+    });
 });
 </script>
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 </body>
 </html>
