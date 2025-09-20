@@ -4,40 +4,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Victor Dada - Home</title>
-  <link rel="stylesheet" href="work.css">
+  <link rel="stylesheet" href="/my-website/assets/work.css">
 </head>
 <body>
   <header>
     <h1>VICTOR DADA</h1>
-    <!-- Navbar: same for all pages -->
-<nav class="navbar" id="navbar">
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  
-  <a href="/my-website/" class="nav-link">Home</a>
-  <a href="/my-website/biography" class="nav-link">Biography</a>
 
-  <div class="dropdown">
-    <button class="dropbtn" onclick="toggleDropdown(this)">Media</button>
-    <div class="dropdown-content">
-      <a href="/my-website/media#media-2023">2023</a>
-      <a href="/my-website/media#media-2024">2024</a>
-      <a href="/my-website/media#media-2025">2025</a>
-    </div>
-  </div>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      
+      <a href="/my-website/" class="nav-link">Home</a>
+      <a href="/my-website/biography" class="nav-link">Biography</a>
 
-  <div class="dropdown">
-    <button class="dropbtn" onclick="toggleDropdown(this)">Pictures</button>
-    <div class="dropdown-content">
-      <a href="/my-website/pictures#pictures-2023">2023</a>
-      <a href="/my-website/pictures#pictures-2024">2024</a>
-      <a href="/my-website/pictures#pictures-2025">2025</a>
-    </div>
-  </div>
+      <div class="dropdown">
+        <button class="dropbtn" onclick="toggleDropdown(this)">Media</button>
+        <div class="dropdown-content">
+          <a href="/my-website/media#media-2023">2023</a>
+          <a href="/my-website/media#media-2024">2024</a>
+          <a href="/my-website/media#media-2025">2025</a>
+        </div>
+      </div>
 
-  <a href="/my-website/contact" class="nav-link">Contact</a>
-</nav>
+      <div class="dropdown">
+        <button class="dropbtn" onclick="toggleDropdown(this)">Pictures</button>
+        <div class="dropdown-content">
+          <a href="/my-website/pictures#pictures-2023">2023</a>
+          <a href="/my-website/pictures#pictures-2024">2024</a>
+          <a href="/my-website/pictures#pictures-2025">2025</a>
+        </div>
+      </div>
 
-
+      <a href="/my-website/contact" class="nav-link">Contact</a>
+    </nav>
   </header>
 
   <div id="mode" style="text-align:right;">DARK MODE</div>
@@ -52,14 +51,14 @@
   <section class="hero">
     <h1>Welcome to Victor Dada’s Official Website</h1>
     <p>Nigerian-born musician & computing student</p>
-    <img src="Victor Adura.jpg" alt="Victor Dada" class="hero-image">
+    <img src="/my-website/assets/images/Victor Adura.jpg" alt="Victor Dada" class="hero-image">
   </section>
 
   <!-- Quick Intro -->
   <section class="intro">
     <h2>About Me</h2>
     <p>Hi! I’m Victor Dada. I’m passionate about music, technology, and creative expression. Explore my site to learn more about my journey and projects.</p>
-    <a href="biography.html" class="btn">Know my story</a>
+    <a href="/my-website/biography" class="btn">Know my story</a>
   </section>
 
   <!-- Highlights Section -->
@@ -75,62 +74,52 @@
     <div class="card">
       <h3>📸 Gallery</h3>
       <p>View photos and videos of my performances and projects.</p>
-      <a href="pictures.html" class="btn">See my Pictures</a>
-      <a href="media.html" class="btn">Watch My Videos</a>
+      <a href="/my-website/pictures" class="btn">See my Pictures</a>
+      <a href="/my-website/media" class="btn">Watch My Videos</a>
     </div>
   </section>
 
   <!-- Call to Action Buttons -->
   <section class="cta-buttons">
-    <a href="contact.html" class="btn">Get in Touch</a>
+    <a href="/my-website/contact" class="btn">Get in Touch</a>
   </section>
 
   <footer>
     <p>&copy; <span id="copyright-year"></span> Victor Dada</p>
   </footer>
 
-
- <script src="theme.js"></script>
+  <script src="/my-website/assets/theme.js"></script>
   <script>
     document.getElementById('copyright-year').innerText = new Date().getFullYear();
-    
+
     // Dark Mode Toggle
-function myFunction() {
-  toggleDarkMode();
-  swapText();
-}
-function toggleDarkMode() {
-  document.body.classList.toggle("dark-mode");
-}
-function swapText() {
-  var x = document.getElementById("mode");
-  x.innerHTML = (x.innerHTML === "DARK MODE") ? "LIGHT MODE" : "DARK MODE";
-}
+    function toggleTheme() {
+      document.body.classList.toggle("dark-mode");
+      var mode = document.getElementById("mode");
+      mode.innerHTML = (mode.innerHTML === "DARK MODE") ? "LIGHT MODE" : "DARK MODE";
+    }
 
-// Mobile Navbar Toggle
-function toggleMenu() {
-  document.getElementById("navbar").classList.toggle("show");
-}
+    // Mobile Navbar Toggle
+    function toggleMenu() {
+      document.getElementById("navbar").classList.toggle("show");
+    }
 
+    // Mobile Dropdown Accordion
+    function toggleDropdown(button) {
+      const dropdown = button.parentElement;
+      document.querySelectorAll('.dropdown').forEach(d => {
+        if (d !== dropdown) { d.classList.remove('active'); }
+      });
+      dropdown.classList.toggle('active');
+    }
 
-// Mobile Dropdown Accordion
-function toggleDropdown(button) {
-  const dropdown = button.parentElement;
-  document.querySelectorAll('.dropdown').forEach(d => {
-    if (d !== dropdown) { d.classList.remove('active'); }
-  });
-  dropdown.classList.toggle('active');
-}
-
-// Highlight active main link based on current page
-const currentPage = location.pathname.split("/").pop();
-document.querySelectorAll(".nav-link").forEach(link => {
-  if (link.getAttribute("href") === currentPage) {
-    link.classList.add("active");
-  }
-});
-
+    // Highlight active main link based on current page
+    const path = location.pathname.split("/").slice(-2, -1)[0]; // folder name
+    document.querySelectorAll(".nav-link").forEach(link => {
+      if (link.getAttribute("href").includes(path)) {
+        link.classList.add("active");
+      }
+    });
   </script>
 </body>
 </html>
-
