@@ -13,6 +13,9 @@
 
 <header>
 <h1>VICTOR DADA</h1>
+<div class="announcement-bar">
+  <span id="typewriter"></span>
+</div>
 
 <!-- Navbar -->
 <nav class="navbar" id="navbar">
@@ -104,10 +107,38 @@
 
 
 <script>
-  const announcementMessage = `⚡ Official Update: <a href="#updates" class="announcement-link">See all latest updates</a>`;
-// === Announcement Setup ===
+  const announcements = [
+  "⚡ Official Update: New pictures have been added!",
+  "🎵 Victor’s latest media now live.",
+  "💻 Dark mode now persists across pages."
+];
+let msgIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+const typeSpeed = 100;  // speed of typing
+const pauseTime = 2000; // pause before deleting
+const typewriter = document.getElementById("typewriter");
 
+function typeEffect() {
+  const current = announcements[msgIndex];
 
+  if (isDeleting) {
+    typewriter.textContent = current.substring(0, charIndex--);
+  } else {
+    typewriter.textContent = current.substring(0, charIndex++);
+  }
+
+  if (!isDeleting && charIndex === current.length) {
+    setTimeout(() => (isDeleting = true), pauseTime);
+  } else if (isDeleting && charIndex === 0) {
+    isDeleting = false;
+    msgIndex = (msgIndex + 1) % announcements.length;
+  }
+
+  setTimeout(typeEffect, isDeleting ? typeSpeed / 2 : typeSpeed);
+}
+
+typeEffect();
 document.addEventListener('DOMContentLoaded', () => {
   const announcement = document.getElementById('announcement');
   const dismissed = localStorage.getItem('announcementDismissed');
@@ -209,6 +240,7 @@ function toggleDropdown(button) {
 </script>
 </body>
 </html>
+
 
 
 
