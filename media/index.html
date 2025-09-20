@@ -9,31 +9,33 @@
 <body>
 <header>
 <h1>VICTOR DADA</h1>
+
+<!-- Navbar -->
 <nav class="navbar" id="navbar">
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
   
-  <a href="/" class="nav-link">Home</a>
-  <a href="/biography" class="nav-link">Biography</a>
+  <a href="/my-website/" class="nav-link">Home</a>
+  <a href="/my-website/biography" class="nav-link">Biography</a>
 
   <div class="dropdown">
     <button class="dropbtn" onclick="toggleDropdown(this)">Media</button>
     <div class="dropdown-content">
-      <a href="/media#media-2023">2023</a>
-      <a href="/media#media-2024">2024</a>
-      <a href="/media#media-2025">2025</a>
+      <a href="/my-website/media#media-2023">2023</a>
+      <a href="/my-website/media#media-2024">2024</a>
+      <a href="/my-website/media#media-2025">2025</a>
     </div>
   </div>
 
   <div class="dropdown">
     <button class="dropbtn" onclick="toggleDropdown(this)">Pictures</button>
     <div class="dropdown-content">
-      <a href="/pictures#pictures-2023">2023</a>
-      <a href="/pictures#pictures-2024">2024</a>
-      <a href="/pictures#pictures-2025">2025</a>
+      <a href="/my-website/pictures#pictures-2023">2023</a>
+      <a href="/my-website/pictures#pictures-2024">2024</a>
+      <a href="/my-website/pictures#pictures-2025">2025</a>
     </div>
   </div>
 
-  <a href="/contact" class="nav-link">Contact</a>
+  <a href="/my-website/contact" class="nav-link">Contact</a>
 </nav>
 
 </header>
@@ -42,43 +44,50 @@
 <div class="button">
   <label class="switch">
       <input type="checkbox" onchange="toggleTheme()">
-    <span class="slider round"></span>
+      <span class="slider round"></span>
   </label>
 </div>
 
 <section class="content-section">
 <h2>Media</h2>
-<section id="media-2023"><h3>2023</h3><p>Media content for 2023...</p></section>
-<section id="media-2024"><h3>2024</h3><p>Media content for 2024...</p></section>
-<section id="media-2025"><h3>2025</h3><p>Media content for 2025...</p></section>
+
+<section id="media-2023">
+  <h3>2023</h3>
+  <p>Media content for 2023...</p>
+</section>
+
+<section id="media-2024">
+  <h3>2024</h3>
+  <p>Media content for 2024...</p>
+</section>
+
+<section id="media-2025">
+  <h3>2025</h3>
+  <p>Media content for 2025...</p>
+</section>
+
 </section>
 
 <footer>
 <p>&copy; <span id="copyright-year"></span> Victor Dada</p>
 </footer>
 
-
-<script src="theme.js"></script>
+<script src="/my-website/assets/theme.js"></script>
 <script>
+// Set copyright year
 document.getElementById('copyright-year').innerText = new Date().getFullYear();
+
 // Dark Mode Toggle
-function myFunction() {
-  toggleDarkMode();
-  swapText();
-}
-function toggleDarkMode() {
+function toggleTheme() {
   document.body.classList.toggle("dark-mode");
-}
-function swapText() {
-  var x = document.getElementById("mode");
-  x.innerHTML = (x.innerHTML === "DARK MODE") ? "LIGHT MODE" : "DARK MODE";
+  const mode = document.getElementById("mode");
+  mode.innerHTML = (mode.innerHTML === "DARK MODE") ? "LIGHT MODE" : "DARK MODE";
 }
 
 // Mobile Navbar Toggle
 function toggleMenu() {
   document.getElementById("navbar").classList.toggle("show");
 }
-
 
 // Mobile Dropdown Accordion
 function toggleDropdown(button) {
@@ -89,14 +98,13 @@ function toggleDropdown(button) {
   dropdown.classList.toggle('active');
 }
 
-// Highlight active main link based on current page
-const currentPage = location.pathname.split("/").pop();
+// Highlight active link
+const path = location.pathname.split("/").slice(-2, -1)[0]; // folder name
 document.querySelectorAll(".nav-link").forEach(link => {
-  if (link.getAttribute("href") === currentPage) {
+  if (link.getAttribute("href").includes(path)) {
     link.classList.add("active");
   }
 });
-
 </script>
 </body>
 </html>
