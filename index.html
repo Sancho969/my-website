@@ -44,6 +44,7 @@
 
 </header>
 
+  
 <div id="mode" style="text-align:right;">DARK MODE</div>
 <div class="button">
   <label class="switch">
@@ -57,6 +58,14 @@
   <h1>Welcome to Victor Dada’s Official Website</h1>
   <p>Nigerian-born musician & computing student</p>
   <img src="Victor Adura.jpg" alt="Victor Dada" class="hero-image">
+</section>
+<section id="updates" class="updates-section">
+  <h2>Latest Updates</h2>
+  <ul>
+    <li>🎵 New album released!</li>
+    <li>💻 Dark mode now persists across pages</li>
+    <li>📸 New pictures added to the gallery</li>
+  </ul>
 </section>
 
 <!-- Quick Intro -->
@@ -93,9 +102,52 @@
 <p>&copy; <span id="copyright-year"></span> Victor Dada</p>
 </footer>
 
-<script src="announcement.js"></script>
-<script src="theme.js"></script>
+
 <script>
+  const announcementMessage = `⚡ Official Update: <a href="#updates" class="announcement-link">See all latest updates</a>`;
+// === Announcement Setup ===
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const announcement = document.getElementById('announcement');
+  const dismissed = localStorage.getItem('announcementDismissed');
+
+  if (!dismissed) {
+    // Inject announcement message with close button
+    announcement.innerHTML = `${announcementMessage} <span class="close" onclick="closeAnnouncement()">&times;</span>`;
+    announcement.style.display = 'block';
+    document.body.classList.add('announcement-shown');
+  }
+
+  // Apply dark mode if already active
+  if (document.body.classList.contains('dark-mode')) {
+    announcement.style.backgroundColor = "#333";
+    announcement.style.color = "#fffae6";
+  }
+});
+
+// Close announcement
+function closeAnnouncement() {
+  const announcement = document.getElementById('announcement');
+  announcement.style.display = 'none';
+  document.body.classList.remove('announcement-shown');
+  localStorage.setItem('announcementDismissed', 'true'); // remembers dismissal across pages
+}
+
+  document.addEventListener('DOMContentLoaded', () => {
+  // Add smooth scrolling to announcement link
+  const link = document.querySelector('.announcement-link');
+  if (link) {
+    link.addEventListener('click', (e) => {
+      e.preventDefault(); // prevent default jump
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+});
+
 // Set copyright year
 document.getElementById('copyright-year').innerText = new Date().getFullYear();
 
@@ -157,6 +209,7 @@ function toggleDropdown(button) {
 </script>
 </body>
 </html>
+
 
 
 
