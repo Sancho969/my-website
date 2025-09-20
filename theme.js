@@ -56,3 +56,21 @@ window.addEventListener("load", () => {
     document.body.classList.add("dark-mode");
   }
 });
+
+// Show announcement if not dismissed
+document.addEventListener('DOMContentLoaded', () => {
+  const dismissed = localStorage.getItem('announcementDismissed');
+  if (!dismissed) {
+    document.body.classList.add('announcement-shown');
+    document.getElementById('announcement').style.display = 'block';
+  } else {
+    document.getElementById('announcement').style.display = 'none';
+  }
+});
+
+// Close announcement
+function closeAnnouncement() {
+  document.getElementById('announcement').style.display = 'none';
+  document.body.classList.remove('announcement-shown');
+  localStorage.setItem('announcementDismissed', 'true'); // remembers dismissal
+}
