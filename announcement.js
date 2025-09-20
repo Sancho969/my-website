@@ -1,5 +1,5 @@
 // === Announcement Setup ===
-const announcementMessage = "⚡ Official Update: Victor Dada’s new album is out now!"; // Update here
+const announcementMessage = "⚡ Official Update: a new video is out!"; // Update here
 
 document.addEventListener('DOMContentLoaded', () => {
   const announcement = document.getElementById('announcement');
