@@ -17,30 +17,35 @@ h1, h2 { text-align: center; margin: 1rem 0; }
 /* ===== Navbar ===== */
 /* Fixed navbar at top */
 .navbar {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 15px 30px;
+  background: rgba(20, 20, 20, 0.6); /* semi-transparent */
+  backdrop-filter: blur(10px); /* glass effect */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
-  background: #111;   /* dark background */
-  padding: 15px 0;
   z-index: 1000;
-  display: flex;
-  justify-content: center; /* center links horizontally */
-  align-items: center;
-  gap: 40px;          /* space between links */
+  transition: background 0.3s ease;
 }
 
+/* Navbar links */
 .navbar a, .dropbtn {
-  color:#fff;
-  background-color: #333;
-  padding: 14px 20px;
-  text-decoration: none;
-  text-align: center;
-  cursor: pointer;
-  display: inline-block;
+  font-size: 1.3rem;
   font-weight: bold;
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.2s ease;
+  padding: 10px 20px;
 }
-.navbar a:hover { background-color: #555; }
+
+.navbar a:hover, .dropbtn:hover {
+  color: #ffcc00;
+  transform: scale(1.1);
+}
 /* Style for links and dropdown buttons */
 .navbar .nav-link, 
 .navbar .dropbtn {
@@ -52,6 +57,10 @@ h1, h2 { text-align: center; margin: 1rem 0; }
   transition: color 0.3s ease, transform 0.2s ease;
 }
 
+.navbar a.active {
+  color: #ffcc00;
+  border-bottom: 2px solid #ffcc00;
+}
 /* Hover effect */
 .navbar .nav-link:hover,
 .navbar .dropbtn:hover {
@@ -470,6 +479,7 @@ footer { text-align: center; padding: 1rem; background: #333; color: white; marg
   color: #fff;
   font-weight: bold;
 }
+
 
 
 
