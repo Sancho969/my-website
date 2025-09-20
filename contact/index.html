@@ -68,7 +68,7 @@
 <p>&copy; <span id="copyright-year"></span> Victor Dada</p>
 </footer>
 
-
+<script src="../assets/theme.js"></script>
 <script>
 // Set year
 document.getElementById('copyright-year').innerText = new Date().getFullYear();
@@ -78,7 +78,32 @@ function toggleTheme() {
   document.body.classList.toggle("dark-mode");
   document.getElementById("mode").innerHTML = (document.getElementById("mode").innerHTML === "DARK MODE") ? "LIGHT MODE" : "DARK MODE";
 }
+  
+// Check saved theme on page load
+document.addEventListener('DOMContentLoaded', () => {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+    document.getElementById('mode').innerText = 'LIGHT MODE';
+  } else {
+    document.getElementById('mode').innerText = 'DARK MODE';
+  }
+});
 
+// Toggle dark mode and save preference
+function toggleTheme() {
+  document.body.classList.toggle('dark-mode');
+  const modeText = document.getElementById('mode');
+  if (document.body.classList.contains('dark-mode')) {
+    localStorage.setItem('theme', 'dark');
+    modeText.innerText = 'LIGHT MODE';
+  } else {
+    localStorage.setItem('theme', 'light');
+    modeText.innerText = 'DARK MODE';
+  }
+}
+
+  
 // Mobile Navbar Toggle
 function toggleMenu() {
   document.getElementById("navbar").classList.toggle("show");
@@ -116,3 +141,4 @@ document.getElementById('contactForm').addEventListener('submit', function(e){
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 </body>
 </html>
+
