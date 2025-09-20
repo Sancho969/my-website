@@ -88,6 +88,15 @@ h1, h2 { text-align: center; margin: 1rem 0; }
   border-bottom: 2px solid #444;
 }
 
+.announcement-bar a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.announcement-bar a:hover {
+  text-decoration: underline;
+}
+
 .announcement-bar #typewriter {
   border-right: 2px solid #fff; /* cursor effect */
   white-space: nowrap;
@@ -394,5 +403,6 @@ footer { text-align: center; padding: 1rem; background: #333; color: white; marg
   color: #fff;
   font-weight: bold;
 }
+
 
 
