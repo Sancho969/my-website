@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Victor Dada - Media</title>
-<link rel="stylesheet" href="work.css">
+<link rel="stylesheet" href="../work.css">
 </head>
 <body>
 <header>
@@ -13,31 +13,30 @@
 <!-- Navbar -->
 <nav class="navbar" id="navbar">
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  
-  <a href="/my-website/" class="nav-link">Home</a>
-  <a href="/my-website/biography" class="nav-link">Biography</a>
+
+  <a href="../" class="nav-link">Home</a>
+  <a href="../biography" class="nav-link">Biography</a>
 
   <div class="dropdown">
     <button class="dropbtn" onclick="toggleDropdown(this)">Media</button>
     <div class="dropdown-content">
-      <a href="/my-website/media#media-2023">2023</a>
-      <a href="/my-website/media#media-2024">2024</a>
-      <a href="/my-website/media#media-2025">2025</a>
+      <a href="./#media-2023">2023</a>
+      <a href="./#media-2024">2024</a>
+      <a href="./#media-2025">2025</a>
     </div>
   </div>
 
   <div class="dropdown">
     <button class="dropbtn" onclick="toggleDropdown(this)">Pictures</button>
     <div class="dropdown-content">
-      <a href="/my-website/pictures#pictures-2023">2023</a>
-      <a href="/my-website/pictures#pictures-2024">2024</a>
-      <a href="/my-website/pictures#pictures-2025">2025</a>
+      <a href="../pictures#pictures-2023">2023</a>
+      <a href="../pictures#pictures-2024">2024</a>
+      <a href="../pictures#pictures-2025">2025</a>
     </div>
   </div>
 
-  <a href="/my-website/contact" class="nav-link">Contact</a>
+  <a href="../contact" class="nav-link">Contact</a>
 </nav>
-
 </header>
 
 <div id="mode" style="text-align:right;">DARK MODE</div>
@@ -50,38 +49,24 @@
 
 <section class="content-section">
 <h2>Media</h2>
-
-<section id="media-2023">
-  <h3>2023</h3>
-  <p>Media content for 2023...</p>
-</section>
-
-<section id="media-2024">
-  <h3>2024</h3>
-  <p>Media content for 2024...</p>
-</section>
-
-<section id="media-2025">
-  <h3>2025</h3>
-  <p>Media content for 2025...</p>
-</section>
-
+<section id="media-2023"><h3>2023</h3><p>Media content for 2023...</p></section>
+<section id="media-2024"><h3>2024</h3><p>Media content for 2024...</p></section>
+<section id="media-2025"><h3>2025</h3><p>Media content for 2025...</p></section>
 </section>
 
 <footer>
 <p>&copy; <span id="copyright-year"></span> Victor Dada</p>
 </footer>
 
-<script src="/my-website/assets/theme.js"></script>
+
 <script>
-// Set copyright year
+// Set year
 document.getElementById('copyright-year').innerText = new Date().getFullYear();
 
 // Dark Mode Toggle
 function toggleTheme() {
   document.body.classList.toggle("dark-mode");
-  const mode = document.getElementById("mode");
-  mode.innerHTML = (mode.innerHTML === "DARK MODE") ? "LIGHT MODE" : "DARK MODE";
+  document.getElementById("mode").innerHTML = (document.getElementById("mode").innerHTML === "DARK MODE") ? "LIGHT MODE" : "DARK MODE";
 }
 
 // Mobile Navbar Toggle
@@ -89,22 +74,21 @@ function toggleMenu() {
   document.getElementById("navbar").classList.toggle("show");
 }
 
-// Mobile Dropdown Accordion
+// Mobile Dropdown
 function toggleDropdown(button) {
   const dropdown = button.parentElement;
-  document.querySelectorAll('.dropdown').forEach(d => {
-    if (d !== dropdown) { d.classList.remove('active'); }
-  });
+  document.querySelectorAll('.dropdown').forEach(d => { if (d !== dropdown) d.classList.remove('active'); });
   dropdown.classList.toggle('active');
 }
 
 // Highlight active link
-const path = location.pathname.split("/").slice(-2, -1)[0]; // folder name
-document.querySelectorAll(".nav-link").forEach(link => {
-  if (link.getAttribute("href").includes(path)) {
-    link.classList.add("active");
-  }
-});
+(function highlightNav() {
+  const pathParts = location.pathname.split("/").filter(Boolean);
+  const currentFolder = pathParts[pathParts.length - 1];
+  document.querySelectorAll(".nav-link").forEach(link => {
+    if (link.getAttribute("href").includes(currentFolder)) link.classList.add("active");
+  });
+})();
 </script>
 </body>
 </html>
