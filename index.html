@@ -24,7 +24,7 @@
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
 
   <a href="./" class="nav-link"><img src="home-button.png" alt="Home" class="nav-icon">Home</a>
-  <a href="biography/" class="nav-link"><img src="information.png" alt="Bio" class="nav-icon">Biography</a>
+  <a href="biography/" class="nav-link"><img src="information.png" alt="Bio" class="nav-icon">About</a>
 
   <div class="dropdown">
     <button class="dropbtn" onclick="toggleDropdown(this)"><img src="video-camera.png" alt="Media" class="nav-icon">Media</button>
@@ -58,20 +58,22 @@
   </label>
 </div>
 
-<!-- Hero Section -->
 <section class="hero">
-  <h1>Welcome to Victor Dada’s Official Website</h1>
-  <p>Nigerian-born musician & computing student</p>
+  
+  
+  <h1 class="heading" style="padding-bottom: 15px;">Hello! 
+    <span class="wave" role="img" aria-labelledby="wave">👋🏻</span></h1>
+  <h2>Welcome to my first Website</h2>
+  <h2>My name is <strong>Victor Dada</strong></h2>
+  <div >
+  <h2 id="typewriter-link">
+    <span id="typewriter"></span>
+    <span class="Typewriter__cursor">|</span>
+  </h2>
   <img src="Victor Adura.jpg" alt="Victor Dada" class="hero-image">
+</div>
 </section>
-<section id="updates" class="updates-section">
-  <h2>Latest Updates</h2>
-  <ul>
-    <li>🎵 New album released!</li>
-    <li>💻 Dark mode now persists across pages</li>
-    <li>📸 New pictures added to the gallery</li>
-  </ul>
-</section>
+
 
 <!-- Quick Intro -->
 <section class="intro">
@@ -110,9 +112,9 @@
 
 <script>
 const announcements = [
-  { text: "⚡ Official Update: New pictures have been added!", link: "/my-website/pictures#pictures-2025" },
-  { text: "🎵 Victor’s latest media now live.", link: "/my-website/media#media-2024" },
-  { text: "💻 Dark mode now persists across pages.", link: "/my-website/" }
+  { text: "A Nigerian Born Computing Student" },
+  { text: "💻graphics Designer" },
+  
 ];
 
 let msgIndex = 0;
@@ -253,6 +255,7 @@ function toggleDropdown(button) {
 </script>
 </body>
 </html>
+
 
 
 
