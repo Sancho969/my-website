@@ -2,39 +2,74 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link href="https://fonts.cdnfonts.com/css/goudy-stout" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Victor Dada - Home</title>
-<link rel="stylesheet" href="work.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- Splash Screen -->
+<div class="splash">
+  <div class="splash-logo"></div>
+  <div class="splash-text">
+    <h1>Welcome to Victor Dada's Website</h1>
+  </div>
+</div>
+
+
+<!-- Matrix Background -->
 <canvas id="matrix"></canvas>
 <div class="overlay"></div>
 
 <header>
   <nav class="navbar" id="navbar">
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    <a href="./" class="nav-link active"><img src="home-button.png" alt="Home" class="nav-icon">Home</a>
-    <a href="biography/" class="nav-link"><img src="information.png" alt="Bio" class="nav-icon">About</a>
-    <div class="dropdown">
-      <button class="dropbtn" onclick="toggleDropdown(this)"><img src="video-camera.png" class="nav-icon">Media</button>
-      <div class="dropdown-content">
-        <a href="media#media-2023">2023</a>
-        <a href="media#media-2024">2024</a>
-        <a href="media#media-2025">2025</a>
+    <!-- Logo (left) -->
+    <div class="logo-container">
+      <a href="./">
+        <img src="Pics.png" alt="Logo" class="nav-logo">
+      </a>
+    </div>
+
+    <!-- Nav links (center) -->
+    <div class="nav-center">
+      <a href="./" class="nav-link active">
+        <img src="home-button.png" alt="Home" class="nav-icon">Home
+      </a>
+      <a href="biography/" class="nav-link">
+        <img src="information.png" alt="Bio" class="nav-icon">About
+      </a>
+
+      <div class="dropdown">
+        <button class="dropbtn" onclick="toggleDropdown(this)">
+          <img src="video-camera.png" class="nav-icon">Media
+        </button>
+        <div class="dropdown-content">
+          <a href="media#media-2023">2023</a>
+          <a href="media#media-2024">2024</a>
+          <a href="media#media-2025">2025</a>
+        </div>
       </div>
-    <div class="dropdown">
-    <button class="dropbtn" onclick="toggleDropdown(this)"><img src="picture.png" alt="Pics" class="nav-icon">Pictures</button>
-    <div class="dropdown-content">
-      <a href="pictures#pictures-2023">2023</a>
-      <a href="pictures#pictures-2024">2024</a>
-      <a href="pictures#pictures-2025">2025</a>
+
+      <div class="dropdown">
+        <button class="dropbtn" onclick="toggleDropdown(this)">
+          <img src="picture.png" alt="Pics" class="nav-icon">Pictures
+        </button>
+        <div class="dropdown-content">
+          <a href="pictures#pictures-2023">2023</a>
+          <a href="pictures#pictures-2024">2024</a>
+          <a href="pictures#pictures-2025">2025</a>
+        </div>
+      </div>
+
+      <a href="contact/" class="nav-link">
+        <img src="contact.png" class="nav-icon">Contact
+      </a>
     </div>
-  </div>
-    </div>
-    <a href="contact/" class="nav-link"><img src="contact.png" class="nav-icon">Contact</a>
   </nav>
 </header>
+
+
 
 <div id="mode">DARK MODE</div>
 <div class="button">
@@ -84,32 +119,83 @@
   <p>&copy; <span id="copyright-year"></span> Victor Dada</p>
 </footer>
 
+<!-- Scripts -->
 <script>
+// ===== Splash Screen =====
+window.addEventListener("load", () => {
+  const splash = document.querySelector(".splash");
+  if (!splash) return;
+
+  // Fade out after 2 seconds
+  setTimeout(() => {
+    splash.classList.add("hidden");
+  }, 2500);
+
+  // Remove from layout after fade
+  splash.addEventListener("transitionend", e => {
+    if (e.propertyName === "opacity" && splash.classList.contains("hidden")) {
+      splash.style.display = "none";
+    }
+  });
+});
+
 // ===== Matrix Effect =====
 (function(){
-  const canvas=document.getElementById('matrix'), ctx=canvas.getContext('2d');
-  function resize(){ canvas.width=innerWidth; canvas.height=innerHeight; }
-  window.addEventListener('resize', resize); resize();
-  let fontSize=16;
-  let cols=Math.floor(canvas.width/fontSize)+1;
-  let drops=new Array(cols).fill(0);
-  const chars='abcdefghijklmnopqrstuvwxyz0123456789@#&*(){}[]<>?/\\|+-=';
-  function getMatrixColor(){ return document.body.classList.contains('dark-mode') ? 'rgba(180,40,200,0.95)' : 'rgba(0,0,0,0.6)'; }
-  function draw(){
-    ctx.fillStyle=document.body.classList.contains('dark-mode') ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.08)';
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle=getMatrixColor();
-    ctx.font=fontSize+'px monospace';
-    for(let i=0;i<drops.length;i++){
-      const text=chars.charAt(Math.floor(Math.random()*chars.length));
-      ctx.fillText(text,i*fontSize,drops[i]*fontSize);
-      if(drops[i]*fontSize>canvas.height && Math.random()>0.975) drops[i]=0;
-      drops[i]++;
+  const canvas = document.getElementById('matrix'),
+        ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  let fontSize = 16;
+  let cols = Math.floor(canvas.width / fontSize) + 1;
+  let drops = new Array(cols).fill(0);
+
+  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789@#&*(){}[]<>?/\\|+-=';
+
+  function getMatrixColor() {
+    return document.body.classList.contains('dark-mode')
+      ? 'rgba(180,40,200,0.95)'
+      : 'rgba(0,0,0,0.6)';
+  }
+
+  // ✅ New: choose speed depending on mode
+  function getSpeed() {
+    return document.body.classList.contains('dark-mode') ? 0.2 : 0.2;
+  }
+
+  function draw() {
+    ctx.fillStyle = document.body.classList.contains('dark-mode')
+      ? 'rgba(0,0,0,0.08)'
+      : 'rgba(255,255,255,0.08)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = getMatrixColor();
+    ctx.font = fontSize + 'px monospace';
+
+    const speed = getSpeed(); // pick speed based on theme
+
+    for (let i = 0; i < drops.length; i++) {
+      const text = chars.charAt(Math.floor(Math.random() * chars.length));
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+
+      drops[i] += speed;
     }
+
     requestAnimationFrame(draw);
   }
+
   draw();
 })();
+
 
 // ===== Typewriter Effect =====
 const announcements=[{text:"A Nigerian Born Computing Student",color:"#ffcc00"},{text:"💻 Graphics Designer",color:"#ffcc00"}];
@@ -134,7 +220,10 @@ function toggleTheme(){
   else{ localStorage.setItem('theme','light'); modeText.innerText='DARK MODE'; }
 }
 window.addEventListener('DOMContentLoaded',()=>{
-  if(localStorage.getItem('theme')==='dark'){ document.body.classList.add('dark-mode'); document.getElementById('mode').innerText='LIGHT MODE'; }
+  if(localStorage.getItem('theme')==='dark'){
+    document.body.classList.add('dark-mode');
+    document.getElementById('mode').innerText='LIGHT MODE';
+  }
 });
 
 // ===== Mobile Navbar =====
@@ -169,6 +258,5 @@ function updateLightboxShadow(){
 // ===== Set Copyright Year =====
 document.getElementById('copyright-year').innerText=new Date().getFullYear();
 </script>
-
 </body>
 </html>
