@@ -1,9 +1,101 @@
+/* ===== Splash Screen ===== */
+.splash {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #161616; /* fallback color */
+  z-index: 10000; /* above everything */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 1s ease;
+  overflow: hidden;
+}
+
+/* Splash Text Below Center */
+.splash-text {
+  position: absolute;
+  top: 75%; /* slightly below center */
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffffff;
+  text-align: center;
+  outline-color: #000;
+  font-family: 'Goudy Stout', sans-serif;
+  font-size: 2rem;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+  transition: opacity 1s ease, transform 2s ease;
+
+
+  /* Outline / stroke */
+  -webkit-text-stroke: 0.5px #000; /* black outline */
+       
+  text-shadow:
+     2px 2px 0 #000,
+    -2px 2px 0 #000,
+     2px -2px 0 #000,
+    -2px -2px 0 #000; /* extra fallback for sharp outline */
+}
+
+/* Fade-in keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* Logo Fade-Out + Zoom */
+@keyframes splashFadeOut {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.07); opacity: 0.5; }
+  100% { transform: scale(1.1); opacity: 0; }
+}
+
+/* Zoom In Keyframes */
+@keyframes zoomIn {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); } /* zoom in by 10% */
+}
+
+
+.splash.hidden .splash-text {
+  opacity: 0;
+  transform: translateX(-50%) scale(1.05);
+}
+
+
+.splash.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Splash Logo Fullscreen Background */
+.splash-logo {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('Pics.png'); /* replace with your logo */
+  background-size: cover;           /* cover the viewport */
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: zoomIn 3s ease forwards; /* zoom in animation */
+  transition: opacity 1s ease;
+}
+
+/* Fade-out / zoom */
+.splash.hidden .splash-logo {
+  opacity: 0;
+  animation: splashFadeOut 1s forwards;
+}
 
 /* ===== Base Styles ===== */
 body {
   font-family: monospace;
   margin: 0;
-  padding: 0;
+  padding: 70px;
   min-height: 100vh;
   color: #000;
   background: url('bg_tile.png') repeat;
@@ -34,31 +126,36 @@ body.dark-mode .overlay {
 h1 { font-size: 80px; font-family: "Brush Script MT", cursive; }
 h2 { font-size: 30px; font-family: "Lucida Console", monospace; }
 
-  .container {
-      max-width: 900px; /* controls width */
-      margin: 50px auto; /* centers content */
-      padding: 20px;
-    }
-/* ===== Navbar ===== */
-/* Fixed navbar at top */
-.navbar {
-   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  background-color: #11111100;
-  padding: 10px 0;
-}
-.nav-icon {
-  width: 40px;  /* adjust as needed */
-  height: 40px;
-  margin-bottom: 4px; /* space between icon and text */
+.container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 20px;
 }
 
+/* ===== Navbar ===== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* logo left, links centered using trick */
+  padding: 0 20px;
+  z-index: 999;
+  box-sizing: border-box;
+}
+.nav-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 4px;
+}
 .nav-text {
   font-size: 1rem;
 }
-/* Navbar links */
 .navbar a, .dropbtn {
   font-size: 1.3rem;
   font-weight: bold;
@@ -69,39 +166,95 @@ h2 { font-size: 30px; font-family: "Lucida Console", monospace; }
   display: inline-block;
   text-align: center;
 }
-
 .navbar a:hover, .dropbtn:hover {
   color: #ffcc00;
   transform: scale(1.1);
 }
-/* Style for links and dropdown buttons */
+/* Reset links to normal look */
 .nav-link {
-  display: flex;
-  flex-direction: column;   /* stack icon above text */
-  align-items: center;      /* center horizontally */
   text-decoration: none;
   color: white;
+  padding: 6px 10px;
+  position: relative;
+  transition: color 0.3s;
+}
+
+/* Links */
+.nav-link, .dropbtn {
+  text-decoration: none;
   font-weight: bold;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  transition: color 0.3s, transform 0.2s;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .navbar .dropbtn {
-  font-size: 1.3rem;   /* bigger text */
+  font-size: 1.3rem;
   font-weight: bold;
   padding: 10px 20px;
   color: white;
   text-decoration: none;
   transition: color 0.3s ease, transform 0.2s ease;
 }
-
 .navbar a.active {
   color: #ffcc00;
   border-bottom: 2px solid #ffcc00;
 }
-/* Hover effect */
 .navbar .nav-link:hover,
 .navbar .dropbtn:hover {
   color: #ffcc00;
-  transform: scale(1.1);}
+  transform: scale(1.1);
+}
+.nav-link.active {
+  border-bottom: 2px solid #ffcc00;
+  color: white;  /* keep text white */
+}
+
+/* Add underline on hover only */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background-color: #ffcc00;
+  transition: width 0.3s;
+}
+.nav-link:hover::after {
+  width: 100%; /* underline expands on hover */
+}
+.nav-link:hover, .dropbtn:hover {
+  color: #ffcc00;
+  transform: translateY(-2px);
+}
+
+/* Logo (left) */
+.logo-container {
+  flex: 1; /* keeps it on the far left */
+}
+
+/* Center links */
+.nav-center {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  gap: 25px; /* spacing between links */
+  align-items: center;
+  margin-right: 376px; /* move left, adjust value as needed */
+}
+
+.nav-logo {
+  max-height: 50px;
+  width: auto;
+  display: block;
+}
 
 /* ===== Dropdown ===== */
 .dropdown { position: relative; display: inline-block; }
@@ -189,26 +342,18 @@ body.dark-mode .cta-buttons a.btn:hover { background-color: #ff0000; }
 }
 body.dark-mode .gallery img:hover { box-shadow:0 10px 20px rgba(255,255,255,0.3); }
 
-.menu-toggle {
-  display: none;
-}
-@media screen and (max-width:768px){
-  .menu-toggle { display: block; }
-} 
+.menu-toggle { display: none; }
+@media screen and (max-width:768px){ .menu-toggle { display: block; } }
 
 /* ===== Lightbox (Dark-Mode Aware) ===== */
 .lightbox-overlay {
   position: fixed; top:0; left:0; width:100%; height:100%;
-  background-color: rgba(255,255,255,0.9); /* light mode overlay */
-  display: none;
-  justify-content: center; align-items: center;
-  z-index: 9999;
-  cursor: pointer;
+  background-color: rgba(255,255,255,0.9);
+  display: none; justify-content: center; align-items: center;
+  z-index: 9999; cursor: pointer;
   transition: background-color 0.3s;
 }
-body.dark-mode .lightbox-overlay {
-  background-color: rgba(0,0,0,0.8); /* dark mode overlay */
-}
+body.dark-mode .lightbox-overlay { background-color: rgba(0,0,0,0.8); }
 .lightbox-overlay img {
   max-width: 90%; max-height: 90%; border-radius: 10px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -216,7 +361,11 @@ body.dark-mode .lightbox-overlay {
 .lightbox-overlay span.close {
   position: absolute; top:20px; right:30px; font-size:40px; color:#fff; cursor:pointer;
 }
-
+/* Dark mode card fix */
+body.dark-mode .card {
+  background: #222; /* dark background */
+  color: #ffffff;      /* black text */
+}
 /* ===== Dark Mode Toggle ===== */
 #mode { font-weight:bold; margin:1rem; cursor:pointer; text-align:right; }
 .button { display:flex; justify-content:flex-end; margin:0 1rem 1rem; }
