@@ -1,108 +1,18 @@
-/* ===== Splash Screen ===== */
-.splash {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: #161616; /* fallback color */
-  z-index: 10000; /* above everything */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 1;
-  transition: opacity 1s ease;
-  overflow: hidden;
-}
-
-/* Splash Text Below Center */
-.splash-text {
-  position: absolute;
-  top: 75%; /* slightly below center */
-  left: 50%;
-  transform: translateX(-50%);
-  color: #ffffff;
-  text-align: center;
-  outline-color: #000;
-  font-family: 'Goudy Stout', sans-serif;
-  font-size: 2rem;
-  opacity: 0;
-  animation: fadeIn 1s forwards;
-  transition: opacity 1s ease, transform 2s ease;
-
-
-  /* Outline / stroke */
-  -webkit-text-stroke: 0.5px #000; /* black outline */
-       
-  text-shadow:
-     2px 2px 0 #000,
-    -2px 2px 0 #000,
-     2px -2px 0 #000,
-    -2px -2px 0 #000; /* extra fallback for sharp outline */
-}
-
-/* Fade-in keyframes */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
-  to { opacity: 1; transform: translateX(-50%) translateY(0); }
-}
-
-/* Logo Fade-Out + Zoom */
-@keyframes splashFadeOut {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.07); opacity: 0.5; }
-  100% { transform: scale(1.1); opacity: 0; }
-}
-
-/* Zoom In Keyframes */
-@keyframes zoomIn {
-  from { transform: scale(1); }
-  to { transform: scale(1.1); } /* zoom in by 10% */
-}
-
-
-.splash.hidden .splash-text {
-  opacity: 0;
-  transform: translateX(-50%) scale(1.05);
-}
-
-
-.splash.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Splash Logo Fullscreen Background */
-.splash-logo {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('Pics.png'); /* replace with your logo */
-  background-size: cover;           /* cover the viewport */
-  background-position: center;
-  background-repeat: no-repeat;
-  animation: zoomIn 3s ease forwards; /* zoom in animation */
-  transition: opacity 1s ease;
-}
-
-/* Fade-out / zoom */
-.splash.hidden .splash-logo {
-  opacity: 0;
-  animation: splashFadeOut 1s forwards;
-}
-
 /* ===== Base Styles ===== */
 body {
   font-family: monospace;
   margin: 0;
-  padding: 70px;
+  padding: 0;
   min-height: 100vh;
   color: #000;
   background: url('bg_tile.png') repeat;
-  background-size: auto;
   overflow-y: auto;
   transition: background 0.3s, color 0.3s;
 }
+
+/* ===== Typography ===== */
+h1 { font-size: 80px; font-family: "Brush Script MT", cursive; }
+h2 { font-size: 30px; font-family: "Lucida Console", monospace; }
 
 /* ===== Matrix Canvas & Overlay ===== */
 canvas, .overlay {
@@ -122,14 +32,24 @@ body.dark-mode .overlay {
   background-color: rgba(0,0,0,0.25);
 }
 
-/* ===== Typography ===== */
-h1 { font-size: 80px; font-family: "Brush Script MT", cursive; }
-h2 { font-size: 30px; font-family: "Lucida Console", monospace; }
-
-.container {
-  max-width: 900px;
-  margin: 50px auto;
+/* Card styles */
+.card {
+  background-color: rgba(255, 255, 255, 0.1); /* light default */
   padding: 20px;
+  margin: 20px auto;
+  border-radius: 10px;
+  max-width: 400px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  color: #000; /* text color default */
+}
+
+/* Hover effect */
+.card:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 /* ===== Navbar ===== */
@@ -143,229 +63,71 @@ h2 { font-size: 30px; font-family: "Lucida Console", monospace; }
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
-  justify-content: space-between; /* logo left, links centered using trick */
+  justify-content: space-between; /* logo left, links center using flex trick */
   padding: 0 20px;
   z-index: 999;
   box-sizing: border-box;
 }
+/* Flex container for logo + links + dummy space */
+/* Hide nav links on small screens */
+.nav-center {
+  display: flex;
+  gap: 15px;
+}
+@media (max-width: 768px) {
+  .nav-center {
+    display: none; /* hide normal links */
+    flex-direction: column;
+    background-color: rgba(0,0,0,0.9);
+    position: absolute;
+    top: 70px; /* below navbar */
+    left: 0;
+    width: 100%;
+  }
+  .nav-center.show {
+    display: flex;
+  }
+  /* Hamburger button */
+  .hamburger {
+    display: block;
+    cursor: pointer;
+    font-size: 2rem;
+    color: #fff;
+  }
+}
+@media (min-width: 769px) {
+  .hamburger { display: none; }
+}
+/* Keep logo on left */
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+/* Navbar Logo */
+.nav-logo, .splash-logo {
+  width: auto;
+  height: 60px;  /* adjust to fit navbar (navbar height is 70px) */
+  object-fit: contain;
+  background: none; /* remove full-screen background */
+  position: relative; /* normal flow in navbar */
+  animation: none; /* remove zoom animation */
+}
+/* Nav links style */
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+.nav-link.active { color: #ffcc00; border-bottom: 2px solid #ffcc00; }
+.nav-link:hover { color: #ffcc00; transform: scale(1.1); transition: 0.2s; }
 .nav-icon {
   width: 40px;
   height: 40px;
   margin-bottom: 4px;
 }
-.nav-text {
-  font-size: 1rem;
-}
-.navbar a, .dropbtn {
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-  transition: color 0.3s ease, transform 0.2s ease;
-  padding: 10px 20px;
-  display: inline-block;
-  text-align: center;
-}
-.navbar a:hover, .dropbtn:hover {
-  color: #ffcc00;
-  transform: scale(1.1);
-}
-/* Reset links to normal look */
-.nav-link {
-  text-decoration: none;
-  color: white;
-  padding: 6px 10px;
-  position: relative;
-  transition: color 0.3s;
-}
 
-/* Links */
-.nav-link, .dropbtn {
-  text-decoration: none;
-  font-weight: bold;
-  color: white;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 10px;
-  transition: color 0.3s, transform 0.2s;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.navbar .dropbtn {
-  font-size: 1.3rem;
-  font-weight: bold;
-  padding: 10px 20px;
-  color: white;
-  text-decoration: none;
-  transition: color 0.3s ease, transform 0.2s ease;
-}
-.navbar a.active {
-  color: #ffcc00;
-  border-bottom: 2px solid #ffcc00;
-}
-.navbar .nav-link:hover,
-.navbar .dropbtn:hover {
-  color: #ffcc00;
-  transform: scale(1.1);
-}
-.nav-link.active {
-  border-bottom: 2px solid #ffcc00;
-  color: white;  /* keep text white */
-}
-
-/* Add underline on hover only */
-.nav-link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 0;
-  height: 2px;
-  background-color: #ffcc00;
-  transition: width 0.3s;
-}
-.nav-link:hover::after {
-  width: 100%; /* underline expands on hover */
-}
-.nav-link:hover, .dropbtn:hover {
-  color: #ffcc00;
-  transform: translateY(-2px);
-}
-
-/* Logo (left) */
-.logo-container {
-  flex: 1; /* keeps it on the far left */
-}
-
-/* Center links */
-.nav-center {
-  flex: 2;
-  display: flex;
-  justify-content: center;
-  gap: 25px; /* spacing between links */
-  align-items: center;
-  margin-right: 376px; /* move left, adjust value as needed */
-}
-
-.nav-logo {
-  max-height: 50px;
-  width: auto;
-  display: block;
-}
-
-/* ===== Dropdown ===== */
-.dropdown { position: relative; display: inline-block; }
-.dropdown-content {
-  display: none;
-  position: absolute;
-  top: 100%; left: 50%;
-  transform: translateX(-50%);
-  background: #222;
-  border-radius: 10px;
-  min-width: 180px;
-  box-shadow: 0px 8px 20px rgba(0,0,0,0.3);
-  overflow: hidden;
-}
-.dropdown-content a {
-  display: block;
-  padding: 12px 20px;
-  color: white;
-  text-decoration: none;
-}
-.dropdown-content a:hover { background: #444; color: #ffcc00; padding-left: 25px; }
-.dropdown.active .dropdown-content { display: block; }
-
-/* ===== Dark Mode ===== */
-body.dark-mode {
-  color: #fff;
-  background: url('bg_tile.png') repeat;
-  overflow-y: auto;
-}
-body.dark-mode .navbar { background: rgba(0,0,0,0.6); }
-body.dark-mode .dropdown-content { background-color: rgba(51,51,51,0.8); }
-body.dark-mode .dropdown-content a:hover { background-color: #555; }
-body.dark-mode .cta-buttons a.btn { background-color: #111; }
-body.dark-mode .cta-buttons a.btn:hover { background-color: #ff0000; }
-
-/* ===== Hero ===== */
-.hero { text-align: center; padding: 2rem; }
-.hero-image {
-  display:block; margin:20px auto; max-width:300px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.hero-image:hover { transform: scale(1.05) rotate(-1deg); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
-
-/* Wave Animation */
-.wave { display:inline-block; animation: wave-animation 2s infinite, float 2s ease-in-out infinite; transform-origin:70% 70%; }
-@keyframes wave-animation { 0%,60%,100%{transform:rotate(0deg);} 10%{transform:rotate(14deg);} 20%{transform:rotate(-8deg);} 30%{transform:rotate(14deg);} 40%{transform:rotate(-4deg);} 50%{transform:rotate(10deg);} }
-@keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-5px);} }
-
-/* Typewriter Cursor */
-.Typewriter__cursor { display:inline-block; animation: blinkCursor 1s step-start infinite; }
-@keyframes blinkCursor { 0%,50%,100%{opacity:1;} 25%,75%{opacity:0;} }
-
-/* ===== CTA Buttons ===== */
-.cta-buttons { text-align:center; margin: 2rem 0; }
-.cta-buttons a.btn {
-  display:inline-block; margin:10px; padding:12px 25px; text-decoration:none; font-weight:bold;
-  color:#fff; background-color:#333; border-radius:5px; transition:0.3s, transform 0.2s;
-}
-.cta-buttons a.btn:hover { background-color:#555; transform: scale(1.05); }
-
-/* ===== Highlights Section ===== */
-.highlights .card {
-  display:inline-block; margin:10px; text-align:center; padding:20px; max-width:250px;
-  background:#fff; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.highlights .card:hover { transform: translateY(-10px) scale(1.03); box-shadow:0 10px 20px rgba(0,0,0,0.3); }
-
-/* ===== Gallery Section ===== */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-  margin:20px;
-  justify-items:center;
-}
-.gallery img {
-  width:100%; height:auto; border-radius:4px; box-shadow:0 4px 8px rgba(0,0,0,0.2);
-  cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
-}
-.gallery img:hover {
-  transform: scale(1.05) rotate(-1deg);
-  box-shadow:0 10px 20px rgba(0,0,0,0.3);
-  filter: brightness(1.1);
-}
-body.dark-mode .gallery img:hover { box-shadow:0 10px 20px rgba(255,255,255,0.3); }
-
-.menu-toggle { display: none; }
-@media screen and (max-width:768px){ .menu-toggle { display: block; } }
-
-/* ===== Lightbox (Dark-Mode Aware) ===== */
-.lightbox-overlay {
-  position: fixed; top:0; left:0; width:100%; height:100%;
-  background-color: rgba(255,255,255,0.9);
-  display: none; justify-content: center; align-items: center;
-  z-index: 9999; cursor: pointer;
-  transition: background-color 0.3s;
-}
-body.dark-mode .lightbox-overlay { background-color: rgba(0,0,0,0.8); }
-.lightbox-overlay img {
-  max-width: 90%; max-height: 90%; border-radius: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.lightbox-overlay span.close {
-  position: absolute; top:20px; right:30px; font-size:40px; color:#fff; cursor:pointer;
-}
-/* Dark mode card fix */
-body.dark-mode .card {
-  background: #222; /* dark background */
-  color: #ffffff;      /* black text */
-}
 /* ===== Dark Mode Toggle ===== */
 #mode { font-weight:bold; margin:1rem; cursor:pointer; text-align:right; }
 .button { display:flex; justify-content:flex-end; margin:0 1rem 1rem; }
@@ -382,12 +144,143 @@ body.dark-mode .card {
 input:checked + .slider { background-color:#2196F3; }
 input:checked + .slider:before { transform:translateX(26px); }
 
+/* ===== Sections (Tabs) ===== */
+.tab-section {
+  display: none;
+  padding: 100px 2rem 2rem; /* top padding = navbar height + some spacing */
+  text-align: center;
+}
+
+.tab-section.active {
+  display: block;
+}
+/* ===== Highlights Section ===== */
+.highlights .card {
+  display:inline-block; margin:10px; text-align:center; padding:20px; max-width:250px;
+  background:#fff; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.highlights .card:hover { transform: translateY(-10px) scale(1.03); box-shadow:0 10px 20px rgba(0,0,0,0.3); }
+/* ===== Splash Screen ===== */
+.splash {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #161616;
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 1s ease;
+  overflow: hidden;
+}
+.splash-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* full viewport height */
+  max-height: 100vh; /* ensures it fits on mobile */
+  background-image: url('Pics.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: zoomIn 3s ease forwards;
+}
+
+
+.splash-text {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  color: #fff;
+  font-family: 'Goudy Stout', sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.8s ease, transform 1s ease 0.5s; /* delay float slightly */
+  -webkit-text-stroke: 0.5px #000;
+  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+}
+@media (max-width: 480px) {
+  .splash-text {
+    font-size: 1.2rem;
+    top: 65%;
+  }
+}
+
+.splash.hidden { opacity: 0; pointer-events: none; }
+.splash.hidden .splash-logo {
+  opacity: 0;
+  animation: splashFadeOut 1s forwards;
+}
+.splash.hidden .splash-text {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-40px); /* float upward */
+}
+
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes splashFadeOut {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.5; }
+  100% { transform: scale(1.2); opacity: 0; }
+}
+/* Pulse Animation */
+@keyframes pulse {
+  0% { transform: scale(1.05); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1.05); }
+}
+/* ===== Typewriter ===== */
+#typewriter { color: #ffcc00; font-size: 1.5rem; margin-top: 1rem; }
+.Typewriter__cursor { display:inline-block; animation: blinkCursor 1s step-start infinite; }
+@keyframes blinkCursor { 0%,50%,100%{opacity:1;} 25%,75%{opacity:0;} }
+
+/* ===== Biography ===== */
+.bio-content { max-width:800px; margin: 0 auto; text-align:left; line-height:1.6; }
+
+/* ===== Contact Form ===== */
+#contactForm { max-width:600px; margin:0 auto; display:flex; flex-direction:column; gap:10px; }
+#contactForm input, #contactForm textarea { padding:10px; border-radius:5px; border:1px solid #ccc; width:100%; }
+#contactForm button { padding:12px; border:none; border-radius:5px; background:#333; color:#fff; cursor:pointer; transition:0.3s; }
+#contactForm button:hover { background:#555; }
+
 /* ===== Footer ===== */
 footer { text-align:center; padding:1rem; background:#333; color:white; margin-top:2rem; }
 
-/* ===== Responsive ===== */
-@media screen and (max-width:768px){
-  .navbar a, .navbar .dropdown { display:none; width:100%; text-align:left; }
-  .navbar.show a, .navbar.show .dropdown { display:block; }
-  .dropdown-content { position: relative; background-color:#444; }
+/* ===== Dark Mode ===== */
+body.dark-mode { color:#fff; background: url('bg_tile.png') repeat; }
+body.dark-mode .navbar { background-color: rgba(0,0,0,0.7); }
+body.dark-mode #contactForm button { background:#111; }
+body.dark-mode #contactForm button:hover { background:#ff0000; }
+/* Dark mode card */
+body.dark-mode .card {
+  background-color: rgba(255, 255, 255, 0.05); /* more transparent for dark mode */
+  color: #fff;
 }
+
+/* Dark mode hover */
+body.dark-mode .card:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 12px rgba(255,255,255,0.2);
+}
+
+.hero { text-align: center; padding: 2rem; }
+.hero-image {
+  display:block; margin:20px auto; max-width:300px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hero-image:hover { transform: scale(1.05) rotate(-1deg); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
