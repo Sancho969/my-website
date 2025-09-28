@@ -28,14 +28,22 @@ function toggleMenu() {
   let cols, drops;
   const chars = 'abcdefghijklmnopqrstuvwxyz0123456789@#&*(){}[]<>?/\\|+-=';
 
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    cols = Math.floor(canvas.width / fontSize) + 1;
-    drops = new Array(cols).fill(0);
-  }
-  window.addEventListener('resize', resize);
-  resize();
+function resize() {
+  // Use visualViewport if available to avoid mobile address bar changes
+  const height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+  canvas.width = window.innerWidth;
+  canvas.height = height;
+
+  cols = Math.floor(canvas.width / fontSize) + 1;
+  drops = new Array(cols).fill(0);
+}
+
+// Call once at start
+resize();
+
+// Only resize on orientation change, not scroll
+window.addEventListener('orientationchange', resize);
+
 
   function getMatrixColor() {
     return document.body.classList.contains('dark-mode') ? 'rgba(180,40,200,0.95)' : 'rgba(0,0,0,0.6)';
@@ -123,3 +131,4 @@ contactForm.addEventListener('submit', function(e){
 
 // ===== Set Year =====
 document.getElementById('copyright-year').innerText = new Date().getFullYear();
+
