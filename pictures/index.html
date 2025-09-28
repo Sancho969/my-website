@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Victor Dada - Pictures</title>
-<link rel="stylesheet" href="../work.css">
+<!-- Absolute path to CSS -->
+<link rel="stylesheet" href="/work.css">
 </head>
 <body>
 <!-- Matrix Background -->
@@ -15,48 +16,49 @@
   <nav class="navbar" id="navbar">
     <!-- Logo (left) -->
     <div class="logo-container">
-      <a href="./">
-        <img src="Pics.png" alt="Logo" class="nav-logo">
+      <a href="/">
+        <img src="/Pics.png" alt="Logo" class="nav-logo">
       </a>
     </div>
 
     <!-- Nav links (center) -->
     <div class="nav-center">
-      <a href="./" class="nav-link active">
-        <img src="home-button.png" alt="Home" class="nav-icon">Home
+      <a href="/" class="nav-link active">
+        <img src="/home-button.png" alt="Home" class="nav-icon">Home
       </a>
-      <a href="biography/" class="nav-link">
-        <img src="information.png" alt="Bio" class="nav-icon">About
+      <a href="/biography/" class="nav-link">
+        <img src="/information.png" alt="Bio" class="nav-icon">About
       </a>
 
       <div class="dropdown">
         <button class="dropbtn" onclick="toggleDropdown(this)">
-          <img src="video-camera.png" class="nav-icon">Media
+          <img src="/video-camera.png" class="nav-icon">Media
         </button>
         <div class="dropdown-content">
-          <a href="media#media-2023">2023</a>
-          <a href="media#media-2024">2024</a>
-          <a href="media#media-2025">2025</a>
+          <a href="/media#media-2023">2023</a>
+          <a href="/media#media-2024">2024</a>
+          <a href="/media#media-2025">2025</a>
         </div>
       </div>
 
       <div class="dropdown">
         <button class="dropbtn" onclick="toggleDropdown(this)">
-          <img src="picture.png" alt="Pics" class="nav-icon">Pictures
+          <img src="/picture.png" alt="Pics" class="nav-icon">Pictures
         </button>
         <div class="dropdown-content">
-          <a href="pictures#pictures-2023">2023</a>
-          <a href="pictures#pictures-2024">2024</a>
-          <a href="pictures#pictures-2025">2025</a>
+          <a href="/pictures#pictures-2023">2023</a>
+          <a href="/pictures#pictures-2024">2024</a>
+          <a href="/pictures#pictures-2025">2025</a>
         </div>
       </div>
 
-      <a href="contact/" class="nav-link">
-        <img src="contact.png" class="nav-icon">Contact
+      <a href="/contact/" class="nav-link">
+        <img src="/contact.png" class="nav-icon">Contact
       </a>
     </div>
   </nav>
 </header>
+
 
 <div id="mode" style="text-align:right;">DARK MODE</div>
 <div class="button">
@@ -138,6 +140,7 @@ function toggleDropdown(button) {
 </script>
 </body>
 </html>
+
 
 
 
