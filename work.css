@@ -24,15 +24,6 @@ canvas, .overlay {
   pointer-events: none;
   z-index: -1;
 }
-canvas#matrix {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-}
-
 .overlay {
   background-color: rgba(255,255,255,0.1);
   transition: background-color 0.3s;
@@ -294,3 +285,126 @@ body.dark-mode .card:hover {
 }
 .hero-image:hover { transform: scale(1.05) rotate(-1deg); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
 
+/* Container */
+.animation-man {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 2rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Stickman wrapper */
+.stickman-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 40px 0;
+  gap: 30px;
+  position: relative;
+}
+
+/* Stickman Container */
+.stickman {
+  position: relative;
+  width: 120px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+/* Head */
+.stickman .head {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: white;
+  margin: 0 auto;
+  box-shadow: 0 0 10px #ffcc00;
+}
+
+/* Body */
+.stickman .body {
+  width: 6px;
+  height: 80px;
+  background: #ffcc00;
+  margin: 0 auto;
+  box-shadow: 0 0 8px #ffcc00;
+}
+
+/* Arms */
+.stickman .arm {
+  width: 60px;
+  height: 6px;
+  background: #ffcc00;
+  position: absolute;
+  top: 60px;
+  box-shadow: 0 0 8px #ffcc00;
+  transform-origin: top left;
+}
+.stickman .arm.left {
+  left: -50px;
+  transform: rotate(-30deg);
+}
+.stickman .arm.right {
+  right: -50px;
+  transform-origin: top right;
+  animation: wave 1s infinite alternate ease-in-out;
+}
+
+/* Legs */
+.stickman .leg {
+  width: 6px;
+  height: 80px;
+  background: #ffcc00;
+  position: absolute;
+  top: 140px;
+  box-shadow: 0 0 8px #ffcc00;
+}
+.stickman .leg.left { left: 25px; transform: rotate(20deg); }
+.stickman .leg.right { right: 25px; transform: rotate(-20deg); }
+
+.stickman .body,
+.stickman .arm,
+.stickman .leg {
+  box-shadow: 0 0 8px #ffcc00;
+}
+
+
+/* Speech Bubble */
+.speech-bubble {
+  position: absolute;
+  top: -20px;
+  left: 120%;
+  background: white;
+  background: rgba(0,0,0,0.6);
+  color: #ffcc00;
+  padding: 10px;
+  border-radius: 10px;
+  font-family: monospace;
+  font-size: 0.9rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  display: inline-block;
+  margin-top: 10px;
+  transition: opacity 0.3s ease;
+  animation: floatText 2s infinite ease-in-out;
+}
+
+/* Animations */
+@keyframes wave {
+  0%   { transform: rotate(20deg); }
+  100% { transform: rotate(60deg); }
+}
+
+@keyframes floatText {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
+}
+
+.about-hero h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ffcc00; /* or any accent color */
+  margin-bottom: 1rem;
+  text-align: center;
+}
