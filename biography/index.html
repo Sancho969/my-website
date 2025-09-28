@@ -95,32 +95,83 @@
 </footer>
 
   
+<!-- Scripts -->
 <script>
+// ===== Splash Screen =====
+window.addEventListener("load", () => {
+  const splash = document.querySelector(".splash");
+  if (!splash) return;
+
+  // Fade out after 2 seconds
+  setTimeout(() => {
+    splash.classList.add("hidden");
+  }, 2500);
+
+  // Remove from layout after fade
+  splash.addEventListener("transitionend", e => {
+    if (e.propertyName === "opacity" && splash.classList.contains("hidden")) {
+      splash.style.display = "none";
+    }
+  });
+});
+
 // ===== Matrix Effect =====
 (function(){
-  const canvas=document.getElementById('matrix'), ctx=canvas.getContext('2d');
-  function resize(){ canvas.width=innerWidth; canvas.height=innerHeight; }
-  window.addEventListener('resize', resize); resize();
-  let fontSize=16;
-  let cols=Math.floor(canvas.width/fontSize)+1;
-  let drops=new Array(cols).fill(0);
-  const chars='abcdefghijklmnopqrstuvwxyz0123456789@#&*(){}[]<>?/\\|+-=';
-  function getMatrixColor(){ return document.body.classList.contains('dark-mode') ? 'rgba(180,40,200,0.95)' : 'rgba(0,0,0,0.6)'; }
-  function draw(){
-    ctx.fillStyle=document.body.classList.contains('dark-mode') ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.08)';
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle=getMatrixColor();
-    ctx.font=fontSize+'px monospace';
-    for(let i=0;i<drops.length;i++){
-      const text=chars.charAt(Math.floor(Math.random()*chars.length));
-      ctx.fillText(text,i*fontSize,drops[i]*fontSize);
-      if(drops[i]*fontSize>canvas.height && Math.random()>0.975) drops[i]=0;
-      drops[i]++;
+  const canvas = document.getElementById('matrix'),
+        ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  let fontSize = 16;
+  let cols = Math.floor(canvas.width / fontSize) + 1;
+  let drops = new Array(cols).fill(0);
+
+  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789@#&*(){}[]<>?/\\|+-=';
+
+  function getMatrixColor() {
+    return document.body.classList.contains('dark-mode')
+      ? 'rgba(180,40,200,0.95)'
+      : 'rgba(0,0,0,0.6)';
+  }
+
+  // ✅ New: choose speed depending on mode
+  function getSpeed() {
+    return document.body.classList.contains('dark-mode') ? 0.2 : 0.2;
+  }
+
+  function draw() {
+    ctx.fillStyle = document.body.classList.contains('dark-mode')
+      ? 'rgba(0,0,0,0.08)'
+      : 'rgba(255,255,255,0.08)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = getMatrixColor();
+    ctx.font = fontSize + 'px monospace';
+
+    const speed = getSpeed(); // pick speed based on theme
+
+    for (let i = 0; i < drops.length; i++) {
+      const text = chars.charAt(Math.floor(Math.random() * chars.length));
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+
+      drops[i] += speed;
     }
+
     requestAnimationFrame(draw);
   }
+
   draw();
 })();
+
 
 // ===== Typewriter Effect =====
 const announcements=[{text:"A Nigerian Born Computing Student",color:"#ffcc00"},{text:"💻 Graphics Designer",color:"#ffcc00"}];
@@ -145,7 +196,10 @@ function toggleTheme(){
   else{ localStorage.setItem('theme','light'); modeText.innerText='DARK MODE'; }
 }
 window.addEventListener('DOMContentLoaded',()=>{
-  if(localStorage.getItem('theme')==='dark'){ document.body.classList.add('dark-mode'); document.getElementById('mode').innerText='LIGHT MODE'; }
+  if(localStorage.getItem('theme')==='dark'){
+    document.body.classList.add('dark-mode');
+    document.getElementById('mode').innerText='LIGHT MODE';
+  }
 });
 
 // ===== Mobile Navbar =====
@@ -182,6 +236,7 @@ document.getElementById('copyright-year').innerText=new Date().getFullYear();
 </script>
 </body>
 </html>
+
 
 
 
