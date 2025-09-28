@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Victor Dada - Portfolio</title>
-<link rel="stylesheet" href="work.css">
+<link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="Pics.png">
 </head>
 <body>
 
@@ -64,7 +65,7 @@
     <h1>Hello! <span class="wave">👋🏻</span></h1>
     <h2>Welcome to my Website</h2>
     <h2>My name is <strong>Victor Dada</strong></h2>
-    <h2 id="typewriter"><span class="Typewriter__cursor">|</span></h2>
+    <h2 id="typewriter" data-text='["A Nigerian Born Computing Student", "💻 Graphics Designer"]'></h2>
     <img src="Victor Adura.jpg" alt="Victor Dada" class="hero-image">
      <div class="card">
     <h3>🎵 Music</h3>
@@ -76,16 +77,53 @@
   </div>
   </section>
 
-  <section id="about" class="tab-section">
-    <h2>Biography</h2>
-    <div class="bio-content">
-      <p><strong>Victor</strong> is a Nigeria-born student currently living in the United Kingdom...</p>
-      <p>Victor’s story began in Nigeria, where he attended <strong>Calvary International School</strong>...</p>
-      <p>He explored graphic design with Photoshop, Illustrator, CorelDRAW...</p>
-      <p>Victor gained admission to the University of Derby for Computer Science...</p>
-      <p>Outside academics, Victor enjoys football, volleyball, basketball...</p>
+ <section id="about" class="tab-section">
+  <h2>Biography</h2>
+
+  <div class="stickman-container">
+    <div class="stickman">
+      <div class="head"></div>
+      <div class="body"></div>
+      <div class="arm left"></div>
+      <div class="arm right"></div>
+      <div class="leg left"></div>
+      <div class="leg right"></div>
     </div>
-  </section>
+
+    
+  </div>
+<section class="about-hero">
+<h2 id="about-typewriter"></h2>
+<div id="chat-box"></div>
+<form id="chat-form">
+  <input type="text" id="chat-input" placeholder="Ask me anything..." required>
+  <button type="submit">Send</button>
+</form>
+</section>
+
+
+  <div class="bio-content">
+    <p><strong>Victor</strong> is a Nigeria-born student now living in the United Kingdom, whose journey is defined by creativity, determination, and a passion for both personal and professional growth.</p>
+
+  <p>His story began in Nigeria, where he attended <strong>Calvary International School</strong> for primary education and <strong>Preston International School</strong> for secondary education. Alongside academics, Victor nurtured his love for music, mastering piano and trumpet, earning a Muson Preliminary Grade in Piano in 2020, and performing in school choir and brass band.</p>
+
+  <p>Victor also explored the world of graphic design with Photoshop, Illustrator, and CorelDRAW, while developing a strong interest in computing. In the UK, he completed a BTEC Extended Certificate in Computing (2023) and a National Diploma in Computing (2024–2025), participating in NHS collaboration projects and earning a Certificate of Achievement.</p>
+
+  <p>Now admitted to the University of Derby for Computer Science, Victor also studies animation and motion graphics, combining technical expertise with creativity. His skillset spans problem-solving, communication, teamwork, public relations, marketing, and digital innovation.</p>
+
+  <p>Outside academics, Victor enjoys football, volleyball, basketball, video games, music, writing, and creative projects such as digital animations. His journey reflects a balance between creativity, technology, and personal growth, with a clear vision of becoming a Software and Network Architect.</p>
+  </div>
+  <section class="about-hero">
+<h2 id="about-typewriter"></h2>
+<div id="chat-box"></div>
+<form id="chat-form">
+  <input type="text" id="chat-input" placeholder="Ask me anything..." required>
+  <button type="submit">Send</button>
+</form>
+</section>
+</section>
+
+
 
   <section id="media" class="tab-section">
     <h2>Media</h2>
@@ -116,4 +154,3 @@
 <script src="app.js"></script>
 </body>
 </html>
-
