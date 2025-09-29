@@ -72,14 +72,26 @@ if(typewriterHome){
   let msgIndex = 0, charIndex = 0, isDeleting = false;
   const typeSpeed = 100, pauseTime = 2000;
 
-  function typeEffectHome() {
-    const currentText = announcements[msgIndex];
-    typewriterHome.textContent = currentText.substring(0,charIndex);
-    if(isDeleting) charIndex--; else charIndex++;
-    if(!isDeleting && charIndex === currentText.length) setTimeout(()=>isDeleting=true, pauseTime);
-    else if(isDeleting && charIndex===0){ isDeleting=false; msgIndex=(msgIndex+1)%announcements.length; }
-    setTimeout(typeEffectHome, isDeleting? typeSpeed/2 : typeSpeed);
+ function typeEffectHome() {
+  const currentTextObj = announcements[msgIndex];
+  const currentText = typeof currentTextObj === 'object' ? currentTextObj.text : currentTextObj;
+  const color = typeof currentTextObj === 'object' && currentTextObj.color ? currentTextObj.color : '#ffcc00';
+  
+  typewriterHome.style.color = color; // <-- set color here
+  typewriterHome.textContent = currentText.substring(0,charIndex);
+
+  if(isDeleting) charIndex--; 
+  else charIndex++;
+
+  if(!isDeleting && charIndex === currentText.length) setTimeout(()=>isDeleting=true, pauseTime);
+  else if(isDeleting && charIndex===0){ 
+    isDeleting=false; 
+    msgIndex=(msgIndex+1)%announcements.length; 
   }
+
+  setTimeout(typeEffectHome, isDeleting? typeSpeed/2 : typeSpeed);
+}
+
   typeEffectHome();
 }
 
@@ -179,3 +191,108 @@ const copyright = document.getElementById('copyright-year');
 if(copyright) {
   copyright.textContent = new Date().getFullYear();
 }
+
+
+// Toggle dropdown on button click (for mobile)
+function toggleDropdown(dropdownId) {
+  const dropdown = document.getElementById(dropdownId);
+  dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+}
+
+// Show the selected year content
+function showMediaYear(event, yearId) {
+  event.preventDefault();
+
+  // Hide all media-year content
+  document.querySelectorAll('.media-year').forEach(div => div.style.display = 'none');
+
+  // Show the selected year
+  document.getElementById(yearId).style.display = 'block';
+
+  // Close dropdown after selection
+  document.getElementById('media-dropdown').style.display = 'none';
+}
+
+// Show the selected Pictures year content
+function showPicturesYear(event, yearId) {
+  event.preventDefault();
+
+  // Hide all pictures-year content
+  document.querySelectorAll('.pictures-year').forEach(div => div.style.display = 'none');
+
+  // Show the selected year
+  document.getElementById(yearId).style.display = 'block';
+
+  // Close dropdown after selection
+  document.getElementById('pictures-dropdown').style.display = 'none';
+}
+
+// Open Lightbox
+document.querySelectorAll('.pictures-grid img').forEach(img => {
+  img.addEventListener('click', () => {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const caption = document.getElementById('caption');
+
+    lightbox.style.display = 'block';
+    lightboxImg.src = img.src;
+    caption.textContent = img.alt;
+  });
+});
+
+// Close Lightbox
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+}
+let currentImages = [];
+let currentIndex = 0;
+
+// Open Lightbox
+document.querySelectorAll('.pictures-grid img').forEach((img, idx, nodeList) => {
+  img.addEventListener('click', () => {
+    // Save all images in this grid
+    currentImages = Array.from(img.parentElement.querySelectorAll('img'));
+    currentIndex = currentImages.indexOf(img);
+    
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const caption = document.getElementById('caption');
+
+    lightbox.style.display = 'flex';
+    lightboxImg.src = img.src;
+    caption.textContent = img.alt;
+  });
+});
+
+// Close Lightbox
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+}
+
+// Navigate Lightbox
+function changeLightbox(direction){
+  const lightboxImg = document.getElementById('lightbox-img');
+  const caption = document.getElementById('caption');
+
+  currentIndex += direction;
+  if(currentIndex < 0) currentIndex = currentImages.length - 1;
+  if(currentIndex >= currentImages.length) currentIndex = 0;
+
+  lightboxImg.src = currentImages[currentIndex].src;
+  caption.textContent = currentImages[currentIndex].alt;
+}
+
+// Event Listeners
+document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+document.getElementById('lightbox-prev').addEventListener('click', ()=>changeLightbox(-1));
+document.getElementById('lightbox-next').addEventListener('click', ()=>changeLightbox(1));
+
+// Keyboard support
+document.addEventListener('keydown', (e) => {
+  const lightbox = document.getElementById('lightbox');
+  if(lightbox.style.display !== 'flex') return;
+
+  if(e.key === 'ArrowLeft') changeLightbox(-1);
+  else if(e.key === 'ArrowRight') changeLightbox(1);
+  else if(e.key === 'Escape') closeLightbox();
+});
