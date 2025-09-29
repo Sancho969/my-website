@@ -17,32 +17,52 @@ window.addEventListener("load", () => {
   let fontSize = 16, cols, drops;
   const chars = 'abcdefghijklmnopqrstuvwxyz0123456789@#&*(){}[]<>?/\\|+-=';
 
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+  function resize(force = false) {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+
+    // Only resize if width changed (ignore height-only changes from mobile scroll)
+    if (!force && w === canvas.width) return;
+
+    canvas.width = w;
+    canvas.height = h;
     cols = Math.floor(canvas.width / fontSize) + 1;
     drops = new Array(cols).fill(0);
   }
-  window.addEventListener('resize', resize);
-  resize();
+
+  // Run once at start
+  resize(true);
+
+  // Listen to resize but ignore height-only changes
+  window.addEventListener('resize', () => resize(false));
 
   function getMatrixColor() {
-    return document.body.classList.contains('dark-mode') ? 'rgba(180,40,200,0.95)' : 'rgba(0,0,0,0.6)';
+    return document.body.classList.contains('dark-mode')
+      ? 'rgba(180,40,200,0.95)'
+      : 'rgba(0,0,0,0.6)';
   }
 
   function draw() {
-    ctx.fillStyle = document.body.classList.contains('dark-mode') ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.08)';
-    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = document.body.classList.contains('dark-mode')
+      ? 'rgba(0,0,0,0.08)'
+      : 'rgba(255,255,255,0.08)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
     ctx.fillStyle = getMatrixColor();
     ctx.font = fontSize + 'px monospace';
-    for(let i=0;i<drops.length;i++){
-      const text = chars.charAt(Math.floor(Math.random()*chars.length));
-      ctx.fillText(text, i*fontSize, drops[i]*fontSize);
-      if(drops[i]*fontSize > canvas.height && Math.random()>0.975) drops[i]=0;
-      drops[i]+=0.2;
+
+    for (let i = 0; i < drops.length; i++) {
+      const text = chars.charAt(Math.floor(Math.random() * chars.length));
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+      drops[i] += 0.2;
     }
     requestAnimationFrame(draw);
   }
+
   draw();
 })();
 
@@ -170,19 +190,24 @@ if(localStorage.getItem('theme')==='dark'){
 }
 
 // ===== Contact Form =====
-emailjs.init('YOUR_PUBLIC_KEY'); 
-const contactFormElement = document.getElementById('contactForm');
-if(contactFormElement){
-  contactFormElement.addEventListener('submit', e=>{
-    e.preventDefault();
-    emailjs.sendForm('service_XXXX','template_XXXX', contactFormElement)
-      .then(()=> { 
-        document.getElementById('formMessage').style.display='block'; 
-        contactFormElement.reset(); 
-      })
-      .catch(()=> alert("Error sending message. Try again."));
-  }); // <-- Close the addEventListener function here
-} // <-- Close the if block
+emailjs.init('PHRzf6HvJtCOh-FvL'); 
+document.getElementById("contactForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  emailjs.sendForm("service_8we21yj", "template_98d4y8u", this)
+    .then(() => {
+      document.getElementById("formMessage").style.display = "block";
+      document.getElementById("formMessage").style.color = "green";
+      document.getElementById("formMessage").textContent = "✅ Thank you! I’ll get back to you soon.";
+      this.reset();
+    }, (error) => {
+      console.error("EmailJS error:", error);
+      document.getElementById("formMessage").style.display = "block";
+      document.getElementById("formMessage").style.color = "red";
+      document.getElementById("formMessage").textContent = "❌ Oops! Something went wrong. Try again.";
+    });
+});
+// <-- Close the if block
 
 
 
@@ -304,4 +329,15 @@ document.addEventListener('keydown', (e) => {
   if(e.key === 'ArrowLeft') changeLightbox(-1);
   else if(e.key === 'ArrowRight') changeLightbox(1);
   else if(e.key === 'Escape') closeLightbox();
+});
+
+document.querySelectorAll('.video-card video').forEach(video => {
+  video.addEventListener('mouseenter', () => {
+    if (!video.paused) return; // already playing
+    video.play();
+  });
+
+  video.addEventListener('mouseleave', () => {
+    if (!document.fullscreenElement) video.pause();
+  });
 });
