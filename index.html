@@ -63,7 +63,7 @@
   <h1>Hello! <span class="wave">👋🏻</span></h1>
   <h2>Welcome to my Website</h2>
   <h2>My name is <strong>Victor Dada</strong></h2>
-  <h2 id="typewriter-home" data-text='["A Nigerian Born Computing Student", "💻 Graphics Designer"]'></h2>
+  <h2 id="typewriter-home" data-text='["A Nigerian Born Computing Student", "💻 Graphics Designer"]'>|</h2>
   <img src="Victor Adura.jpg" alt="Victor Dada" class="hero-image">
 
   <div class="card">
@@ -123,9 +123,18 @@
       <a href="#media-2025" onclick="showMediaYear(event, 'media-2025')">2025</a>
     </div>
   </div>
-
   <div id="media-2023" class="media-year">Content for 2023...</div>
-  <div id="media-2024" class="media-year">Content for 2024...</div>
+  <div id="media-2024" class="media-year">
+  <h3>Videos from 2024</h3>
+ <div class="video-grid">
+  <div class="video-card">
+    <video src="Vid.mp4" muted controls></video>
+  </div>
+  <div class="video-card">
+    <video src="videos/video2.mp4" muted controls></video>
+  </div>
+</div>
+</div>  
   <div id="media-2025" class="media-year">Content for 2025...</div>
 </section>
 
@@ -152,17 +161,17 @@
   <div id="pictures-2024" class="pictures-year">
     <h3>Pictures from 2024</h3>
     <div class="pictures-grid">
-      <img src="Picture1.jpg" >
-      <img src="Picture2.jpg" alt="2024 Picture 2">
-      <img src="Picture3.jpg" alt="2024 Picture 3">
-      <img src="Picture4.jpg" alt="2024 Picture 4">
-      <img src="Picture5.jpg" alt="2024 Picture 5">
-      <img src="Picture6.jpg" alt="2024 Picture 6">
-      <img src="Picture7.jpg" alt="2024 Picture 7">
-      <img src="Picture8.jpg" alt="2024 Picture 8">
-      <img src="Picture9.jpg" alt="2024 Picture 9">
-      <img src="Picture10.jpg" alt="2024 Picture 10">
-      <img src="Picture11.jpg" alt="2024 Picture 11">
+      <img src="images/2024/Picture1.jpg">
+      <img src="images/2024/Picture2.jpg">
+      <img src="images/2024/Picture3.jpg">
+      <img src="images/2024/Picture4.jpg">
+      <img src="images/2024/Picture5.jpg">
+      <img src="images/2024/Picture6.jpg">
+      <img src="images/2024/Picture7.jpg">
+      <img src="images/2024/Picture8.jpg">
+      <img src="images/2024/Picture9.jpg">
+      <img src="images/2024/Picture10.jpg">
+      <img src="images/2024/Picture11.jpg">
       <!-- Add more images as needed -->
     </div>
   </div>
@@ -204,6 +213,7 @@
 </div>
 
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
 <script src="app.js"></script>
 </body>
 </html>
