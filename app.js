@@ -192,7 +192,16 @@ if(copyright) {
   copyright.textContent = new Date().getFullYear();
 }
 
+function toggleMenu() {
+  const navCenter = document.querySelector('.nav-center');
+  navCenter.classList.toggle('show'); // toggles visibility
+}
 
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    document.querySelector('.nav-center').classList.remove('show');
+  });
+});
 // Toggle dropdown on button click (for mobile)
 function toggleDropdown(dropdownId) {
   const dropdown = document.getElementById(dropdownId);
