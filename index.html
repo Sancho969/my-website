@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Victor Dada - Portfolio</title>
 <link rel="stylesheet" href="work.css">
-  <link rel="icon" type="image/png" href="Pics.png">
+<link rel="icon" type="image/png" href="Pics.png">
 </head>
 <body>
 
@@ -58,16 +58,15 @@
   </nav>
 </header>
 
+<!-- Home Section -->
+<section id="home" class="tab-section active">
+  <h1>Hello! <span class="wave">👋🏻</span></h1>
+  <h2>Welcome to my Website</h2>
+  <h2>My name is <strong>Victor Dada</strong></h2>
+  <h2 id="typewriter-home" data-text='["A Nigerian Born Computing Student", "💻 Graphics Designer"]'></h2>
+  <img src="Victor Adura.jpg" alt="Victor Dada" class="hero-image">
 
-
-  <!-- Sections -->
-  <section id="home" class="tab-section active">
-    <h1>Hello! <span class="wave">👋🏻</span></h1>
-    <h2>Welcome to my Website</h2>
-    <h2>My name is <strong>Victor Dada</strong></h2>
-    <h2 id="typewriter" data-text='["A Nigerian Born Computing Student", "💻 Graphics Designer"]'></h2>
-    <img src="Victor Adura.jpg" alt="Victor Dada" class="hero-image">
-     <div class="card">
+  <div class="card">
     <h3>🎵 Music</h3>
     <p>Piano, Trumpet, Choir performances, and more.</p>
   </div>
@@ -75,9 +74,10 @@
     <h3>💻 Computing</h3>
     <p>BTEC in Computing, currently studying Computer Science at the University of Derby.</p>
   </div>
-  </section>
+</section>
 
- <section id="about" class="tab-section">
+<!-- About Section -->
+<section id="about" class="tab-section">
   <h2>Biography</h2>
 
   <div class="stickman-container">
@@ -89,69 +89,121 @@
       <div class="leg left"></div>
       <div class="leg right"></div>
     </div>
-
-    
   </div>
-<section class="about-hero">
-<h2 id="about-typewriter"></h2>
-<div id="chat-box"></div>
-<form id="chat-form">
-  <input type="text" id="chat-input" placeholder="Ask me anything..." required>
-  <button type="submit">Send</button>
-</form>
-</section>
 
+  <section class="about-hero">
+    <h2 id="about-typewriter"></h2>
+    <div id="chat-box"></div>
+    <form id="chat-form">
+      <input type="text" id="chat-input" placeholder="Ask me anything..." required>
+      <button type="submit">Send</button>
+    </form>
+  </section>
 
   <div class="bio-content">
     <p><strong>Victor</strong> is a Nigeria-born student now living in the United Kingdom, whose journey is defined by creativity, determination, and a passion for both personal and professional growth.</p>
 
-  <p>His story began in Nigeria, where he attended <strong>Calvary International School</strong> for primary education and <strong>Preston International School</strong> for secondary education. Alongside academics, Victor nurtured his love for music, mastering piano and trumpet, earning a Muson Preliminary Grade in Piano in 2020, and performing in school choir and brass band.</p>
+    <p>His story began in Nigeria, where he attended <strong>Calvary International School</strong> for primary education and <strong>Preston International School</strong> for secondary education. Alongside academics, Victor nurtured his love for music, mastering piano and trumpet, earning a Muson Preliminary Grade in Piano in 2020, and performing in school choir and brass band.</p>
 
-  <p>Victor also explored the world of graphic design with Photoshop, Illustrator, and CorelDRAW, while developing a strong interest in computing. In the UK, he completed a BTEC Extended Certificate in Computing (2023) and a National Diploma in Computing (2024–2025), participating in NHS collaboration projects and earning a Certificate of Achievement.</p>
+    <p>Victor also explored the world of graphic design with Photoshop, Illustrator, and CorelDRAW, while developing a strong interest in computing. In the UK, he completed a BTEC Extended Certificate in Computing (2023) and a National Diploma in Computing (2024–2025), participating in NHS collaboration projects and earning a Certificate of Achievement.</p>
 
-  <p>Now admitted to the University of Derby for Computer Science, Victor also studies animation and motion graphics, combining technical expertise with creativity. His skillset spans problem-solving, communication, teamwork, public relations, marketing, and digital innovation.</p>
+    <p>Now admitted to the University of Derby for Computer Science, Victor also studies animation and motion graphics, combining technical expertise with creativity. His skillset spans problem-solving, communication, teamwork, public relations, marketing, and digital innovation.</p>
 
-  <p>Outside academics, Victor enjoys football, volleyball, basketball, video games, music, writing, and creative projects such as digital animations. His journey reflects a balance between creativity, technology, and personal growth, with a clear vision of becoming a Software and Network Architect.</p>
+    <p>Outside academics, Victor enjoys football, volleyball, basketball, video games, music, writing, and creative projects such as digital animations. His journey reflects a balance between creativity, technology, and personal growth, with a clear vision of becoming a Software and Network Architect.</p>
   </div>
-  <section class="about-hero">
-<h2 id="about-typewriter"></h2>
-<div id="chat-box"></div>
-<form id="chat-form">
-  <input type="text" id="chat-input" placeholder="Ask me anything..." required>
-  <button type="submit">Send</button>
-</form>
-</section>
 </section>
 
+<!-- Media Section -->
+<section id="media" class="tab-section">
+  <div class="dropdown">
+    <button class="dropbtn" onclick="toggleDropdown('media-dropdown')">Select Year ▼</button>
+    <div id="media-dropdown" class="dropdown-content">
+      <a href="#media-2023" onclick="showMediaYear(event, 'media-2023')">2023</a>
+      <a href="#media-2024" onclick="showMediaYear(event, 'media-2024')">2024</a>
+      <a href="#media-2025" onclick="showMediaYear(event, 'media-2025')">2025</a>
+    </div>
+  </div>
 
+  <div id="media-2023" class="media-year">Content for 2023...</div>
+  <div id="media-2024" class="media-year">Content for 2024...</div>
+  <div id="media-2025" class="media-year">Content for 2025...</div>
+</section>
 
-  <section id="media" class="tab-section">
-    <h2>Media</h2>
-    <p>Media content will go here.</p>
-  </section>
+<!-- Pictures Section -->
+<section id="pictures" class="tab-section">
+  <div class="dropdown">
+    <button class="dropbtn" onclick="toggleDropdown('pictures-dropdown')">Select Year ▼</button>
+    <div id="pictures-dropdown" class="dropdown-content">
+      <a href="#pictures-2023" onclick="showPicturesYear(event, 'pictures-2023')">2023</a>
+      <a href="#pictures-2024" onclick="showPicturesYear(event, 'pictures-2024')">2024</a>
+      <a href="#pictures-2025" onclick="showPicturesYear(event, 'pictures-2025')">2025</a>
+    </div>
+  </div>
 
-  <section id="pictures" class="tab-section">
-    <h2>Pictures</h2>
-    <p>Picture gallery will go here.</p>
-  </section>
+  <div id="pictures-2023" class="pictures-year">
+    <h3>Pictures from 2023</h3>
+    <div class="pictures-grid">
+      <img src="images/2023/pic1.jpg" alt="2023 Picture 1">
+      <img src="images/2023/pic2.jpg" alt="2023 Picture 2">
+      <img src="images/2023/pic3.jpg" alt="2023 Picture 3">
+    </div>
+  </div>
 
-  <section id="contact" class="tab-section">
-    <h2>Contact Me</h2>
-    <form id="contactForm">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="message" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-    <p id="formMessage" style="color: green; display: none;">Thank you! I’ll get back to you soon.</p>
-  </section>
+  <div id="pictures-2024" class="pictures-year">
+    <h3>Pictures from 2024</h3>
+    <div class="pictures-grid">
+      <img src="Picture1.jpg" >
+      <img src="Picture2.jpg" alt="2024 Picture 2">
+      <img src="Picture3.jpg" alt="2024 Picture 3">
+      <img src="Picture4.jpg" alt="2024 Picture 4">
+      <img src="Picture5.jpg" alt="2024 Picture 5">
+      <img src="Picture6.jpg" alt="2024 Picture 6">
+      <img src="Picture7.jpg" alt="2024 Picture 7">
+      <img src="Picture8.jpg" alt="2024 Picture 8">
+      <img src="Picture9.jpg" alt="2024 Picture 9">
+      <img src="Picture10.jpg" alt="2024 Picture 10">
+      <img src="Picture11.jpg" alt="2024 Picture 11">
+      <!-- Add more images as needed -->
+    </div>
+  </div>
 
-  <footer>
-    <p>&copy; <span id="copyright-year"></span> Victor Dada</p>
-  </footer>
+  <div id="pictures-2025" class="pictures-year">
+    <h3>Pictures from 2025</h3>
+    <div class="pictures-grid">
+      <img src="images/2025/pic1.jpg" alt="2025 Picture 1">
+      <img src="images/2025/pic2.jpg" alt="2025 Picture 2">
+      <img src="images/2025/pic3.jpg" alt="2025 Picture 3">
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="tab-section">
+  <h2>Contact Me</h2>
+  <form id="contactForm">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+  <p id="formMessage" style="color: green; display: none;">Thank you! I’ll get back to you soon.</p>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; <span id="copyright-year"></span> Victor Dada</p>
+</footer>
+
+<!-- Lightbox (single, with arrows) -->
+<div id="lightbox">
+  <span id="lightbox-close">&times;</span>
+  <img id="lightbox-img" src="" alt="Lightbox Image">
+  <span id="lightbox-prev" class="lightbox-arrow">&#10094;</span>
+  <span id="lightbox-next" class="lightbox-arrow">&#10095;</span>
+  <div id="caption"></div>
+</div>
 
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
-
