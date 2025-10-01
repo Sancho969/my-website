@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Victor Dada - Portfolio</title>
-<link rel="stylesheet" href="work.css">
+<link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/png" href="Pics.png">
 </head>
 <body>
@@ -124,18 +124,18 @@
     </div>
   </div>
   <div id="media-2023" class="media-year">Content for 2023...</div>
-  <div id="media-2024" class="media-year">
-  <h3>Videos from 2024</h3>
- <div class="video-grid">
+  <div id="media-2024" class="media-year">Content for 2024...</div> 
+  <div id="media-2025" class="media-year">
+    <h3>Videos from 2025</h3>
+    <div class="video-grid">
   <div class="video-card">
     <video src="Vid.mp4" muted controls></video>
   </div>
   <div class="video-card">
-    <video src="videos/video2.mp4" muted controls></video>
+    <video src="Vid1.mp4" muted controls></video>
   </div>
 </div>
-</div>  
-  <div id="media-2025" class="media-year">Content for 2025...</div>
+  </div>
 </section>
 
 <!-- Pictures Section -->
@@ -212,9 +212,14 @@
   <div id="caption"></div>
 </div>
 
+<!-- Video Lightbox -->
+<div id="video-lightbox">
+  <span id="video-lightbox-close">&times;</span>
+  <video id="video-lightbox-player" controls></video>
+</div>
+
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script src="https://www.youtube.com/iframe_api"></script>
 <script src="app.js"></script>
 </body>
 </html>
-
