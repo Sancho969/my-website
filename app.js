@@ -341,3 +341,23 @@ document.querySelectorAll('.video-card video').forEach(video => {
     if (!document.fullscreenElement) video.pause();
   });
 });
+// Video Lightbox
+const videoLightbox = document.getElementById("video-lightbox");
+const videoPlayer = document.getElementById("video-lightbox-player");
+const videoClose = document.getElementById("video-lightbox-close");
+
+document.querySelectorAll(".hover-video").forEach(video => {
+  video.addEventListener("click", () => {
+    videoLightbox.style.display = "flex";
+    videoPlayer.src = video.querySelector("source").src; // load clicked video
+    videoPlayer.play();
+  });
+});
+
+videoClose.addEventListener("click", () => {
+  videoLightbox.style.display = "none";
+  videoPlayer.pause();
+  videoPlayer.src = ""; // reset
+});
+
+
